@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HealthData locale="en_NL">
+    <ExportDate value="2024-06-01 08:10:05 +0200" />
+    <Me HKCharacteristicTypeIdentifierDateOfBirth="1990-05-20"
+        HKCharacteristicTypeIdentifierBiologicalSex="HKBiologicalSexMale"
+        HKCharacteristicTypeIdentifierBloodType="HKBloodTypeANegative"
+        HKCharacteristicTypeIdentifierFitzpatrickSkinType="HKFitzpatrickSkinTypeNotSet"
+        HKCharacteristicTypeIdentifierCardioFitnessMedicationsUse="None" />
+    <Record type="HKQuantityTypeIdentifierHeartRate" sourceName="Alexandre's Apple Watch"
+        sourceVersion="10.2"
+        device="&lt;&lt;HKDevice: 0x3012772a0&gt;, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.2&gt;"
+        unit="count/min" creationDate="2024-01-01 01:01:42 +0200"
+        startDate="2024-01-01 01:01:36 +0200" endDate="2024-01-01 01:01:36 +0200" value="74">
+        <MetadataEntry key="HKMetadataKeyHeartRateMotionContext" value="0" />
+    </Record>
+    <Record type="HKQuantityTypeIdentifierActiveEnergyBurned" sourceName="Alexandre's Apple Watch"
+        sourceVersion="10.2"
+        device="&lt;&lt;HKDevice: 0x3008d6850&gt;, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.2&gt;"
+        unit="kcal" creationDate="2024-01-01 01:03:10 +0200" startDate="2024-01-01 01:02:27 +0200"
+        endDate="2024-01-01 01:02:58 +0200" value="0.12" />
+    <Record type="HKQuantityTypeIdentifierActiveEnergyBurned" sourceName="Alexandre's Apple Watch"
+        sourceVersion="10.2"
+        device="&lt;&lt;HKDevice: 0x3008d6850&gt;, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.2&gt;"
+        unit="kcal" creationDate="2024-01-02 01:53:10 +0200" startDate="2024-01-02 01:52:27 +0200"
+        endDate="2024-01-02 01:52:58 +0200" value="0.08" />
+</HealthData>

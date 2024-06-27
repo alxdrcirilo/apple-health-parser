@@ -1,0 +1,69 @@
+site_name: "Apple Health Parser"
+repo_name: alxdrcirilo/apple-health-parser
+repo_url: https://github.com/alxdrcirilo/apple-health-parser
+
+theme:
+  name: "material"
+  palette:
+    - scheme: default
+      primary: green
+      accent: deep orange
+      toggle:
+        icon: material/brightness-3
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  features:
+    - content.code.annotate
+    - content.tabs.link
+    - search.highlight
+    - search.suggest
+
+plugins:
+  - search
+  - termynal
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+
+markdown_extensions:
+  - admonition
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: "index.md"
+  - Installation: "installation.md"
+  - Tutorial:
+      - Basics: "tutorial/basics.md"
+      - Plots: "tutorial/plots.md"
+  - Usage:
+      - Exceptions: "usage/exceptions.md"
+      - Flags: "usage/flags.md"
+      - Models: "usage/models.md"
+      - Interfaces:
+          - Plot Interface: "usage/interfaces/plot_interface.md"
+          - Preprocessor Interface: "usage/interfaces/preprocessor_interface.md"
+      - Utils:
+          - Loader: "usage/utils/loader.md"
+          - Parser: "usage/utils/parser.md"
+  - Roadmap: "todo.md"
+  # - About:
+  #   - Changelog: "changelog.md"
+  #   - License: "license.md"

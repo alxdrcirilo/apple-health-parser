@@ -1,0 +1,43 @@
+name: Publish to PyPI
+
+on:
+  workflow_run:
+    workflows: ["Commit lint, format, and release"]
+    types:
+      - completed
+
+jobs:
+  check-conditions:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    outputs:
+      should-run: ${{ steps.condition-checker.outputs.should-run }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all tags and branches
+      - name: Check conditions
+        id: condition-checker
+        run: |
+          # Check if the latest commit on main has a tag
+          TAG=$(git tag --points-at HEAD)
+          if [[ $TAG ]]; then
+            echo "This commit has a tag: $TAG"
+            echo "should-run=true" >> $GITHUB_OUTPUT
+          else
+            echo "This commit does not have a tag."
+            echo "should-run=false" >> $GITHUB_OUTPUT
+          fi
+
+  publish:
+    needs: check-conditions
+    if: needs.check-conditions.outputs.should-run == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and publish to PyPI
+        uses: JRubics/poetry-publish@v2.0
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}

@@ -1,0 +1,46 @@
+name: Coverage
+
+on:
+  workflow_run:
+    workflows: ["Commit lint, format, and release"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  coveralls:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Run tests with coverage
+        run: |
+          source .venv/bin/activate
+          pytest --cov=apple_health_parser
+          coverage lcov
+
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2.1.0
+        with:
+          github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          file: coverage.lcov

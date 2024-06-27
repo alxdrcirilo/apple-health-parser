@@ -1,0 +1,210 @@
+HKCategoryTypeIdentifierAppleStandHour:
+  name: Apple Stand Hour
+  unit: count
+  color: "#000000"
+  colormap: viridis
+HKCategoryTypeIdentifierAudioExposureEvent:
+  name: Audio Exposure Event
+  unit: count
+  color: "#000000"
+  colormap: viridis
+HKCategoryTypeIdentifierSleepAnalysis:
+  name: Sleep Analysis
+  unit: count
+  color: "#000000"
+  colormap: viridis
+HKDataTypeSleepDurationGoal:
+  name: Sleep Duration Goal
+  unit: hours
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierActiveEnergyBurned:
+  name: Active Energy Burned
+  unit: kcal
+  color: "#E7103D"
+  colormap: YlOrRd
+HKQuantityTypeIdentifierAppleExerciseTime:
+  name: Exercise Time
+  unit: min
+  color: "#80EB03"
+  colormap: viridis
+HKQuantityTypeIdentifierAppleStandTime:
+  name: Stand Time
+  unit: min
+  color: "#03C9D6"
+  colormap: viridis
+HKQuantityTypeIdentifierBasalEnergyBurned:
+  name: Basal Energy Burned
+  unit: kcal
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierBodyFatPercentage:
+  name: Body Fat Percentage
+  unit: \%
+  color: "salmon"
+  colormap: viridis
+HKQuantityTypeIdentifierBodyMass:
+  name: Body Mass
+  unit: kg
+  color: "royalblue"
+  colormap: viridis
+HKQuantityTypeIdentifierBodyMassIndex:
+  name: Body Mass Index
+  unit: kg/m²
+  color: "seagreen"
+  colormap: viridis
+HKQuantityTypeIdentifierCyclingCadence:
+  name: Cycling Cadence
+  unit: rpm
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierCyclingFunctionalThresholdPower:
+  name: Cycling Functional Threshold Power
+  unit: watts
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierCyclingPower:
+  name: Cycling Power
+  unit: watts
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierCyclingSpeed:
+  name: Cycling Speed
+  unit: km/h
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierDistanceCycling:
+  name: Distance Cycling
+  unit: km
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierDistanceWalkingRunning:
+  name: Distance Walking Running
+  unit: km
+  color: "#000000"
+  colormap: oryel
+HKQuantityTypeIdentifierEnvironmentalAudioExposure:
+  name: Audio Exposure
+  unit: db
+  color: \None"
+  colormap: viridis
+HKQuantityTypeIdentifierEnvironmentalSoundReduction:
+  name: Environmental Sound Reduction
+  unit: db
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierFlightsClimbed:
+  name: Flights Climbed
+  unit: count
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierHeadphoneAudioExposure:
+  name: Headphone Audio Exposure
+  unit: db
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierHeartRate:
+  name: Heart Rate
+  unit: bpm
+  color: \None"
+  colormap: RdYlGn_r
+HKQuantityTypeIdentifierHeartRateRecoveryOneMinute:
+  name: Heart Rate Recovery (1 min)
+  unit: bpm
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierHeartRateVariabilitySDNN:
+  name: Heart Rate Variability (SDNN)
+  unit: ms
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierHeight:
+  name: Height
+  unit: cm
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierLeanBodyMass:
+  name: Lean Body Mass
+  unit: kg
+  color: "#000000"
+  colormap: mint
+HKQuantityTypeIdentifierOxygenSaturation:
+  name: Oxygen Saturation
+  unit: \%
+  color: \None"
+  colormap: RdBu_r
+HKQuantityTypeIdentifierPhysicalEffort:
+  name: Physical Effort
+  unit: unit
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierRespiratoryRate:
+  name: Respiratory Rate
+  unit: breaths/min
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierRestingHeartRate:
+  name: Resting Heart Rate
+  unit: bpm
+  color: \None"
+  colormap: RdYlGn_r
+HKQuantityTypeIdentifierRunningGroundContactTime:
+  name: Running Ground Contact Time
+  unit: ms
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierRunningPower:
+  name: Running Power
+  unit: watts
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierRunningSpeed:
+  name: Running Speed
+  unit: km/h
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierRunningStrideLength:
+  name: Running Stride Length
+  unit: m
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierRunningVerticalOscillation:
+  name: Running Vertical Oscillation
+  unit: cm
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierSixMinuteWalkTestDistance:
+  name: Six Minute Walk Test Distance
+  unit: m
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierStairAscentSpeed:
+  name: Stair Ascent Speed
+  unit: m/s
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierStairDescentSpeed:
+  name: Stair Descent Speed
+  unit: m/s
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierStepCount:
+  name: Step Count
+  unit: steps
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierTimeInDaylight:
+  name: Time in Daylight
+  unit: min
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierVO2Max:
+  name: VO2 Max
+  unit: ml/kg/min
+  color: "#000000"
+  colormap: viridis
+HKQuantityTypeIdentifierWalkingHeartRateAverage:
+  name: Walking Heart Rate Average
+  unit: bpm
+  color: "#000000"
+  colormap: viridis
