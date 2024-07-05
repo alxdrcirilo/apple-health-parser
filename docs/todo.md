@@ -19,3 +19,4 @@
 
 - [ ] Check docstrings
 - [ ] Add proper documentation with examples for each plot
+- [ ] Add pages for CHANGELOG.md and LICENSE.md
