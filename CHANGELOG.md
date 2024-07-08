@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.5.1 (2024-07-08)
+
+### Fix
+
+* fix: source_version optional
+
+Some older data does not include the `sourceVersion` attribute. ([`64413f5`](https://github.com/alxdrcirilo/apple-health-parser/commit/64413f591067ae45632a28e2c8c5e689737c3d0a))
+
 ## v0.5.0 (2024-07-05)
 
 ### Breaking
