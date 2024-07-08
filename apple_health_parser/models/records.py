@@ -23,11 +23,12 @@ class HealthData(BaseModel):
         description="Name of the source",
         examples=["Apple Watch"],
     )
-    source_version: str = Field(
+    source_version: str | None = Field(
+        default=None,
         alias="sourceVersion",
         title="Source Version",
         description="Version of the source",
-        examples=["10.2"],
+        examples=[None, "10.2", "11.0.1"],
     )
     unit: str = Field(
         alias="unit",

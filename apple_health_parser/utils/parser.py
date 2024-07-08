@@ -4,6 +4,7 @@ from pathlib import Path
 
 import click
 import pandas as pd
+from pydantic import ValidationError
 
 from apple_health_parser.decorators import timeit
 from apple_health_parser.exceptions import (
@@ -103,19 +104,43 @@ class Parser(Loader):
         if flag not in self.flags:
             raise InvalidFlag(flag, self.flags)
 
-        # Heart rate records have additional metadata (motionContext)
-        if flag == "HKQuantityTypeIdentifierHeartRate":
-            return [
-                HeartRateData(
-                    **{
-                        **rec.attrib,
-                        **{"motionContext": rec.find("MetadataEntry").attrib["value"]},
-                    }
-                )
-                for rec in self.records[flag]
-            ]
-        else:
-            return [HealthData(**rec.attrib) for rec in self.records[flag]]
+        models: list[HealthData | HeartRateData] = []
+        failed: dict[str, int] = {}
+
+        for rec in self.records[flag]:
+            try:
+                # Heart rate records have additional metadata (motionContext)
+                if flag == "HKQuantityTypeIdentifierHeartRate":
+                    models.append(
+                        HeartRateData(
+                            **{
+                                **rec.attrib,
+                                **{
+                                    "motionContext": rec.find("MetadataEntry").attrib[
+                                        "value"
+                                    ]
+                                },
+                            }
+                        )
+                    )
+                else:
+                    models.append(HealthData(**rec.attrib))
+
+            except ValidationError as exc:
+                error_type = exc.errors()[0]["type"]
+                loc = exc.errors()[0]["loc"]
+                try:
+                    failed[f"{error_type}_{loc}"] += 1
+                except KeyError:
+                    failed[f"{error_type}_{loc}"] = 1
+                continue
+
+        if failed:
+            logger.warning(
+                click.style(f"Failed to parse {len(failed)} records", bold=True)
+            )
+
+        return models
 
     def _get_dates(self, models: list) -> set[date]:
         """
@@ -234,7 +259,7 @@ class Parser(Loader):
         for n, flag in enumerate(self.flags):
             try:
                 parsed = self.get_flag_records(flag=flag)
-            except:
+            except Exception:
                 logger.error(f"Error parsing {flag=}")
                 continue
 
