@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apple-health-parser"
-version = "0.5.1"
+version = "0.5.2"
 description = "Python package to parse, analyse, and plot Apple HealthKit data"
 authors = ["Alexandre Cirilo <38657258+alxdrcirilo@users.noreply.github.com>"]
 repository = "https://github.com/alxdrcirilo/apple-health-parser"
