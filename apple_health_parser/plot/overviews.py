@@ -95,7 +95,7 @@ class Overview:
                 case "body":
                     plt = getattr(go, "Scatter")
 
-            fig.append_trace(
+            fig.add_trace(
                 plt(
                     x=daily_sum.date,
                     y=daily_sum.value,
