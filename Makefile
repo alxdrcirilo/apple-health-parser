@@ -1,4 +1,4 @@
-.PHONY: format
+.PHONY: install venv clean format test test-fixtures help
 
 SRC = apple_health_parser
 VENV = .venv
@@ -19,8 +19,11 @@ format: venv ## Format code
 	ruff check --fix $(SRC) $(TESTS)
 	ruff format $(SRC) $(TESTS)
 
+docs: venv ## Generate documentation
+	mkdocs serve
+
 test: venv ## Run tests
-	pytest -s $(TESTS) --cov=$(SRC) --cov-report=term-missing --cov-report=html
+	pytest -sx $(TESTS) --cov=$(SRC) --cov-report=term-missing --cov-report=html
 
 test-fixtures: venv ## Show tests fixtures
 	pytest --fixtures

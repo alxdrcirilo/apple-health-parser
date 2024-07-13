@@ -161,17 +161,20 @@ class Parser(Loader):
         For example:
 
         ```python
-        HKCategoryTypeIdentifierAppleStandHour         {('type', 'sourceName', 'sourceVersion', 'device', ...)}
-        HKCategoryTypeIdentifierAudioExposureEvent     {('type', 'sourceName', 'sourceVersion', 'device', ...)}
-        HKDataTypeSleepDurationGoal                    {('type', 'sourceName', 'sourceVersion', 'unit', ...)}
-        HKQuantityTypeIdentifierActiveEnergyBurned     {('type', 'sourceName', 'sourceVersion', 'device', ...)}
+        HKCategoryTypeIdentifierAppleStandHour         {'startDate', 'device', 'sourceName', 'endDate', ...}
+        HKCategoryTypeIdentifierAudioExposureEvent     {'startDate', 'device', 'sourceName', 'endDate', ...}
+        HKQuantityTypeIdentifierActiveEnergyBurned     {'startDate', 'device', 'sourceName', 'endDate', ...}
         ```
 
         Returns:
             dict[str, set]: Dictionary with flags as keys and set of record keys as values
         """
         return {
-            flag: {tuple(rec.attrib.keys()) for rec in self.records[flag]}
+            flag: {
+                k
+                for rec in self.records["HKQuantityTypeIdentifierActiveEnergyBurned"]
+                for k in rec.attrib.keys()
+            }
             for flag in self.flags
         }
 

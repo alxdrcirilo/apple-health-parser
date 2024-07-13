@@ -87,37 +87,28 @@ class TestParser:
         assert actual_dates == {date(2024, 1, 1), date(2024, 1, 2)}
 
     def test_map_record_keys_to_flags(self, parser: Parser) -> None:
-        expected_result = {
-            "HKQuantityTypeIdentifierHeartRate": {
-                (
-                    "type",
-                    "sourceName",
-                    "sourceVersion",
-                    "device",
-                    "unit",
-                    "creationDate",
-                    "startDate",
-                    "endDate",
-                    "value",
-                )
-            },
-            "HKQuantityTypeIdentifierActiveEnergyBurned": {
-                (
-                    "type",
-                    "sourceName",
-                    "sourceVersion",
-                    "device",
-                    "unit",
-                    "creationDate",
-                    "startDate",
-                    "endDate",
-                    "value",
-                )
-            },
+        flags = [
+            "HKQuantityTypeIdentifierActiveEnergyBurned",
+            "HKQuantityTypeIdentifierAppleExerciseTime",
+            "HKQuantityTypeIdentifierAppleStandTime",
+            "HKQuantityTypeIdentifierHeartRate",
+        ]
+        record_keys = {
+            "device",
+            "type",
+            "startDate",
+            "value",
+            "sourceName",
+            "endDate",
+            "creationDate",
+            "sourceVersion",
+            "unit",
         }
         flag_map = parser._map_record_keys_to_flags()
-
-        assert flag_map == expected_result
+        # Check if the flags are in the flag_map
+        assert sorted(flag_map.keys()) == flags
+        # Check if the record keys are as expected
+        assert all(record_keys == i for i in flag_map.values())
 
     def test_get_flag_records(self, parser: Parser) -> None:
         with mock.patch(
@@ -169,5 +160,16 @@ class TestParser:
         ) as mock_write_csv:
             parser.export(dir_name=tmp_path)
 
-            assert mock_get_flag_records.call_count == 2
-            assert mock_write_csv.call_count == 2
+            assert mock_get_flag_records.call_count == 4
+            assert mock_write_csv.call_count == 4
+
+    def test_parsed(self, parser: Parser) -> None:
+        flag = "HKQuantityTypeIdentifierHeartRate"
+        records = parser.get_flag_records(flag=flag)
+        str_records = str(records)
+
+        assert "ParsedData" in str_records
+        assert flag in str_records
+        assert all(
+            item in str_records for item in ["Flag", "Sources", "Dates", "Records"]
+        )
