@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.5.3 (2024-07-14)
+
+### Fix
+
+* fix: body overview_type requires daily mean ([`f5cc434`](https://github.com/alxdrcirilo/apple-health-parser/commit/f5cc434199b04dee8021158c1b92d0c4f51be1e8))
+
 ## v0.5.2 (2024-07-13)
 
 ### Build
