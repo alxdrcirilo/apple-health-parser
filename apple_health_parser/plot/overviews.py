@@ -86,7 +86,10 @@ class Overview:
         fig = subplots.make_subplots(rows=3, cols=1, shared_xaxes=True)
 
         for row, (flag, data) in enumerate(self.dataframes.items()):
-            daily_sum = data.groupby("date")["value"].sum().reset_index()
+            if self.overview_type == "activity":
+                daily = data.groupby("date")["value"].sum().reset_index()
+            elif self.overview_type == "body":
+                daily = data.groupby("date")["value"].mean().reset_index()
 
             # Type of plot determined by the overview type
             match self.overview_type:
@@ -97,8 +100,8 @@ class Overview:
 
             fig.add_trace(
                 plt(
-                    x=daily_sum.date,
-                    y=daily_sum.value,
+                    x=daily.date,
+                    y=daily.value,
                     marker_color=FLAG_METADATA[flag].color,
                     name=FLAG_METADATA[flag].name,
                 ),
