@@ -35,4 +35,5 @@ In a nutshell, *Apple Health Parser* is capable of:
 
 Additionally, it also comes with a CLI for the terminal geeks.
 
-> :warning: This package is still in **active development** and has not been tested on real data coming from different sources, nor has it been tested with data originating from versions of iOS < 17.
+> [!WARNING]
+> This package is still in **active development** and has not been tested on real data coming from different sources, nor has it been tested with data originating from versions of iOS < 17.
