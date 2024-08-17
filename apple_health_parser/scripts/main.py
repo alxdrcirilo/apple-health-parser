@@ -1,7 +1,6 @@
 import click
 
-from apple_health_parser.plot.overviews import ActivityOverview
-from apple_health_parser.plot.plots import Plot
+from apple_health_parser.plot import Overview, Plot
 from apple_health_parser.utils.logging import logger
 from apple_health_parser.utils.parser import Parser
 
@@ -34,7 +33,7 @@ def main(zip_file: str) -> None:
         "HKQuantityTypeIdentifierAppleStandTime",
     ]
     data = parser.get_flag_records(flag=flags)
-    overview = ActivityOverview(data=data, year=2024, source=source)
+    overview = Overview(data=data, overview_type="activity", year=2024, source=source)
     overview.plot(show=True, save=True, format="svg")
 
 
