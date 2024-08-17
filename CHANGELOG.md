@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.5.4 (2024-08-17)
+
+### Documentation
+
+* docs(README): fix warning markdown alert ([`d2bc78c`](https://github.com/alxdrcirilo/apple-health-parser/commit/d2bc78c672453df63232d8fe220a0d0f4924ce3f))
+
+### Fix
+
+* fix: circular imports in plot subpackage (#3) ([`498d384`](https://github.com/alxdrcirilo/apple-health-parser/commit/498d38453055a7eb4ed3de58e800cb9e03f028a7))
+
 ## v0.5.3 (2024-07-14)
 
 ### Fix
