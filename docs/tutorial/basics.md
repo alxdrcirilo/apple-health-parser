@@ -63,6 +63,23 @@ print(sources)
    "HKDataTypeSleepDurationGoal": ["Health"]}
 ```
 
+### Listing the devices
+
+In addition to sources, you also get information regarding the devices your Apple Health data originates from. In a nutshell, sources is the shorthand name for a given device. For example, you may have `"Alexandre's Apple Watch"` as the sole source, but `['Apple Watch (Watch6,7; 10.2)', 'Apple Watch (Watch6,7; 10.3)', 'Apple Watch (Watch6,7; 10.3.1)', 'Apple Watch (Watch6,7; 10.4)', 'Apple Watch (Watch6,7; 10.5)', 'Apple Watch (Watch6,7; 10.6)', 'Apple Watch (Watch6,7; 10.6.1)'` as devices. That's because device information includes the following:
+
+- Device name
+- Hardware version
+- Software version (if provided)
+
+The `get_devices` method from the `Parser` class works in the same fashion as the `get_sources` method, i.e. on a single flag or on the entirety of the data. Here's an example for a single flag:
+
+```python
+devices = parser.get_devices(flag="HKQuantityTypeIdentifierHeartRate")
+print(devices)
+
+> ['Apple Watch (Watch6,7; 10.2)', 'Apple Watch (Watch6,7; 10.3)', 'Apple Watch (Watch6,7; 10.3.1)', 'Apple Watch (Watch6,7; 10.4)', 'Apple Watch (Watch6,7; 10.5)', 'Apple Watch (Watch6,7; 10.6)', 'Apple Watch (Watch6,7; 10.6.1)']
+```
+
 ### Getting the records
 
 This is a very simple step and can be done in one single line of code by calling the `get_flag_records` method from the parser:
@@ -74,6 +91,7 @@ print(data)
 > =================ParsedData==================
   Flag:       HKQuantityTypeIdentifierHeartRate
   Sources:    3 sources
+  Devices:    8 devices
   Dates:      117603 dates
   Records:    117603 records
 ```

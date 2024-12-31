@@ -51,7 +51,6 @@ class Parser(Loader):
             zip_file=export_file, output_dir=output_dir, overwrite=overwrite
         )
         self.records = self._get_records()
-        self.sources = self.get_sources()
 
     @timeit
     def _get_records(self) -> dict[str, list[ET.Element]]:
@@ -194,16 +193,80 @@ class Parser(Loader):
 
         def _get_parsed_data(flag: str) -> ParsedData:
             sources = self.get_sources(flag=flag)
+            devices = self.get_devices(flag=flag)
             models = self._build_models(flag=flag)
             dates = self._get_dates(models=models)
             records = pd.DataFrame([model.model_dump() for model in models])
-            return ParsedData(flag=flag, sources=sources, dates=dates, records=records)
+            return ParsedData(
+                flag=flag,
+                sources=sources,
+                devices=devices,
+                dates=dates,
+                records=records,
+            )
 
         if isinstance(flag, str):
             return _get_parsed_data(flag=flag)
 
         elif isinstance(flag, list):
             return {f: _get_parsed_data(flag=f) for f in flag}
+
+    def get_devices(self, flag: str | None = None) -> list[str] | dict[str, list[str]]:
+        """
+        Get devices for each flag or for a given flag.
+
+        Args:
+            flag (str, optional): Get devices for the given flag, defaults to None
+
+        Returns:
+            list[str] | dict[str, list[str]]: Dictionary with flags as keys and list of devices as values
+        """
+
+        def _get_device_name(rec: ET.Element) -> str:
+            """
+            Get the device name from the record.
+
+            For example:
+            `'<<HKDevice: 0x9999zz000>, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.6>'`
+
+            Should return:
+            `'Apple Watch (Watch6,7; 10.6)'`
+
+            Args:
+                rec (ET.Element): Record from the export.xml file
+
+            Returns:
+                str: Device name with model and software version
+            """
+            device_info = rec.attrib["device"].split(", ")
+            name = device_info[1].split(":")[1]
+            model = device_info[4].split(":")[1]
+            try:
+                software = device_info[5].split(":")[1].strip(">")
+                return f"{name} ({model}; {software})"
+            except IndexError:
+                logger.debug(f"No software version found for {name} ({model})")
+                return f"{name} ({model})"
+
+        if flag:
+            return sorted(
+                {
+                    _get_device_name(rec)
+                    for rec in self.records[flag]
+                    if "device" in rec.attrib
+                }
+            )
+        else:
+            return {
+                flag: sorted(
+                    {
+                        _get_device_name(rec)
+                        for rec in self.records[flag]
+                        if "device" in rec.attrib
+                    }
+                )
+                for flag in self.flags
+            }
 
     def get_sources(self, flag: str | None = None) -> list[str] | dict[str, list[str]]:
         """
