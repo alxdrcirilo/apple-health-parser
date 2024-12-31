@@ -23,18 +23,14 @@ class TestParser:
             return_value=xml_file,
         ) as mock_extract_zip, mock.patch(
             "apple_health_parser.utils.parser.Parser._get_records", return_value=[]
-        ) as mock_get_records, mock.patch(
-            "apple_health_parser.utils.parser.Parser.get_sources", return_value=[]
-        ) as mock_get_sources:
+        ) as mock_get_records:
             parser = Parser(export_file=export_file, output_dir=tmp_path)
 
             assert parser.xml_file == mock_extract_zip.return_value
             assert parser.records == mock_get_records.return_value
-            assert parser.sources == mock_get_sources.return_value
 
             mock_extract_zip.assert_called_once()
             mock_get_records.assert_called_once()
-            mock_get_sources.assert_called_once()
 
     def test_get_records(self, parser: Parser) -> None:
         expected_flags = [
