@@ -54,6 +54,14 @@ class Preprocessor(PreprocessorInterface):
         if self.flag == "HKQuantityTypeIdentifierOxygenSaturation":
             self.records.value *= 100
 
+        if self.flag == "HKCategoryTypeIdentifierSleepAnalysis":
+            if self.oper:
+                logger.warning(
+                    "Sleep data does not support operations. "
+                    "Returning raw sleep data without applying the operation."
+                )
+                self.oper = None
+
         # Apply operation (e.g. "mean" or "sum")
         if self.oper:
             self.records = (
@@ -72,6 +80,12 @@ class Preprocessor(PreprocessorInterface):
 
             # Return heatmap data if requested
             if self.hmap:
+                if self.flag == "HKCategoryTypeIdentifierSleepAnalysis":
+                    logger.warning(
+                        "Heatmaps are not supported for sleep data. "
+                        "Returning raw sleep data without heatmap."
+                    )
+                    self.hmap = False
                 return self.get_heatmap(self.records)
 
         else:

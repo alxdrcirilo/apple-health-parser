@@ -9,7 +9,7 @@ install: ## Create virtual environment
 	poetry install
 
 venv: install ## Activate virtual environment
-	poetry shell
+	poetry env activate
 
 clean: ## Clean up
 	pyclean . --debris
