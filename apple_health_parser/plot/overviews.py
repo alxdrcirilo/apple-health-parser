@@ -6,7 +6,11 @@ from plotly import graph_objects as go
 from plotly import subplots
 from plotly.graph_objs import Figure
 
-from apple_health_parser.config.definitions import AllowedImageFormats, OverviewType
+from apple_health_parser.config.definitions import (
+    AllowedImageFormats,
+    OverviewSubtypes,
+    OverviewType,
+)
 from apple_health_parser.consts import FLAG_METADATA, OVERVIEW_TYPES
 from apple_health_parser.exceptions import (
     InvalidImageFormat,
@@ -21,7 +25,7 @@ class Overview:
     def __init__(
         self,
         data: dict[str, ParsedData],
-        overview_type: str,
+        overview_type: OverviewType,
         year: int = date.today().year,
         source: str | None = None,
         title: bool = False,
@@ -31,7 +35,7 @@ class Overview:
 
         Args:
             data (dict[str, ParsedData]): Dict with flag as key and ParsedData as value
-            overview_type (str): Type of overview (e.g. "activity", "body")
+            overview_type (OverviewType): Type of overview (e.g. "activity", "body")
             year (int, optional): Year, defaults to date.today().year
             source (str | None, optional):  Source, defaults to None
             title (bool, optional): Flag to include the plot title, defaults to False
@@ -59,7 +63,7 @@ class Overview:
         if self.overview_type not in OVERVIEW_TYPES:
             raise InvalidOverviewType(self.overview_type)
 
-        flags: list[str] = OverviewType[self.overview_type.upper()].value
+        flags: list[str] = OverviewSubtypes[self.overview_type.upper()].value
 
         flags_not_in_data_bool: list[bool] = [flag not in self.data for flag in flags]
         if any(flags_not_in_data_bool):

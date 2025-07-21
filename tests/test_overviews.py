@@ -26,22 +26,22 @@ class TestOverviews:
         records = parser.get_flag_records(flag=flags)
 
         with pytest.raises(InvalidOverviewType):
-            Overview(data=records, overview_type="fake-overview")
+            Overview(data=records, overview_type="fake-overview", year=2024)
 
         with pytest.raises(MissingFlag):
-            Overview(data=records, overview_type="body")
+            Overview(data=records, overview_type="body", year=2024)
 
     def test_get_figure(self, parser: Parser, flags: list[str]) -> None:
         records = parser.get_flag_records(flag=flags)
 
-        overview = Overview(data=records, overview_type="activity")
+        overview = Overview(data=records, overview_type="activity", year=2024)
         fig = overview._get_figure()
         assert isinstance(fig, Figure)
 
     def test_plot(self, parser: Parser, flags: list[str]) -> None:
         records = parser.get_flag_records(flag=flags)
 
-        overview = Overview(data=records, overview_type="activity")
+        overview = Overview(data=records, overview_type="activity", year=2024)
         fig = overview.plot(show=False, save=False)
         assert isinstance(fig, Figure)
 
@@ -62,7 +62,7 @@ class TestOverviews:
     def test_plot_invalid_image_format(self, parser: Parser, flags: list[str]) -> None:
         records = parser.get_flag_records(flag=flags)
 
-        overview = Overview(data=records, overview_type="activity")
+        overview = Overview(data=records, overview_type="activity", year=2024)
         fmt = "tiff"
         with pytest.raises(InvalidImageFormat):
             overview.plot(show=False, save=True, format=fmt)

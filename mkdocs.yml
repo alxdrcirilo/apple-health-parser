@@ -24,6 +24,7 @@ theme:
     - search.suggest
 
 plugins:
+  - autorefs
   - search
   - termynal
   - mkdocstrings:

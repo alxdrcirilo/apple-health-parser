@@ -7,6 +7,7 @@ There are 3 types of plots that can be generated:
 1. **Standard**: The most generic type of plot *Apple Health Parser* can generate. With the exception of *heart rate* data that includes *motion context* metadata, all remaining flags are plotted the same way.
 2. **Heatmap**: Heatmaps are useful when trying to visualize 2-dimensional data such as yearly views (i.e. record at a given day and month).
 3. **Overview**: Overview plots include multiple flags (e.g. the activity overview includes the active energy burned, exercise time, and stand time).
+4. **Sleep**: Sleep plots are a special type of plot that visualizes the sleep data in a more intuitive way, showing the start and end times of each sleep stage.
 
 !!! note
     Heatmaps require an `operation` argument, providing an invalid operation or not providing one at all will cause [`InvalidHeatmapOperation`](../usage/exceptions.md#apple_health_parser.exceptions.InvalidHeatmapOperation) to be raised.
@@ -102,3 +103,25 @@ Below you can find some examples for both the standard and heatmap plots.
 
 ![activity_overview_light](../assets/plots/activity_overview_light.svg#only-light)
 ![activity_overview_dark](../assets/plots/activity_overview_dark.svg#only-dark)
+
+### Sleep
+
+*Apple Health Parser* also provides a way to visualize the sleep data in a more intuitive way, showing the start and end times of each sleep stage. The sleep stages are represented as follows:
+
+- **Awake**: Represents the periods when the user is awake during the night.
+- **Core**: Represents the light sleep stage, where the user is in a relaxed state but not in deep sleep.
+- **Deep**: Represents the deep sleep stage, where the body is in a state of rest and recovery.
+- **REM**: Represents the rapid eye movement (REM) sleep stage, which is associated with dreaming and is important for cognitive functions.
+
+For this type of plot, you can use the `SleepPlot` class which is a subclass of the `Plot` class. The `SleepPlot` class takes the same arguments as the `Plot` class, but it also has an additional argument called `timerange` which is a tuple representing the start and end times for the sleep analysis in ISO 8601 format (i.e. `YYYY-MM-DDTHH:MM:SSZ`). If not provided, it defaults to the entire year.
+
+```python
+from apple_health_parser.plot.sleep import SleepPlot
+
+
+plt = SleepPlot(data=data, timerange=("2024-01-01T00:00:00Z", "2024-12-31T23:59:59Z"))
+plt.plot(save=True)
+```
+
+![apple_health_parser_sleep_plot_light](../assets/plots/plot_sleep_analysis_light.svg#only-light)
+![apple_health_parser_sleep_plot_dark](../assets/plots/plot_sleep_analysis_dark.svg#only-dark)

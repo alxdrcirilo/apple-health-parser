@@ -60,7 +60,12 @@ class PlotType(StrEnum):
     HEATMAP = "imshow"
 
 
-class OverviewType(Enum):
+class OverviewType(StrEnum):
+    ACTIVITY = "activity"
+    BODY = "body"
+
+
+class OverviewSubtypes(Enum):
     ACTIVITY = [
         "HKQuantityTypeIdentifierActiveEnergyBurned",
         "HKQuantityTypeIdentifierAppleExerciseTime",
@@ -95,3 +100,13 @@ class PlotSettings:
     legend: str | None
     title: str | None
     title_yaxis: str | None
+
+
+@dataclass(frozen=True)
+class SleepColors:
+    in_bed: str = "#00c7bd"
+    awake: str = "#ff816a"
+    core: str = "#32abe4"
+    deep: str = "#007aff"
+    rem: str = "#3634a3"
+    unset: str = "#505050"

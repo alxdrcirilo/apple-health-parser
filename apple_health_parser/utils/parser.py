@@ -13,7 +13,7 @@ from apple_health_parser.exceptions import (
     MissingRecords,
 )
 from apple_health_parser.models.parsed import ParsedData
-from apple_health_parser.models.records import HealthData, HeartRateData
+from apple_health_parser.models.records import HealthData, HeartRateData, SleepData
 from apple_health_parser.utils.loader import Loader
 from apple_health_parser.utils.logging import logger
 
@@ -116,6 +116,20 @@ class Parser(Loader):
                                 **rec.attrib,
                                 **{
                                     "motionContext": rec.find("MetadataEntry").attrib[
+                                        "value"
+                                    ]
+                                },
+                            }
+                        )
+                    )
+                elif flag == "HKCategoryTypeIdentifierSleepAnalysis":
+                    # Sleep records have additional metadata (value)
+                    models.append(
+                        SleepData(
+                            **{
+                                **rec.attrib,
+                                **{
+                                    "timezone": rec.find("MetadataEntry").attrib[
                                         "value"
                                     ]
                                 },

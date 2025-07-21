@@ -1,6 +1,8 @@
 import click
 
-from apple_health_parser.plot import Overview, Plot
+from apple_health_parser.plot.overviews import Overview
+from apple_health_parser.plot.plots import Plot
+from apple_health_parser.plot.sleep import SleepPlot
 from apple_health_parser.utils.logging import logger
 from apple_health_parser.utils.parser import Parser
 
@@ -23,7 +25,7 @@ def main(zip_file: str) -> None:
     source = "Alexandre’s Apple\xa0Watch"
     data = parser.get_flag_records(flag=flag)
 
-    plot = Plot(data=data, source=source, operation="sum", heatmap=False)
+    plot = Plot(data=data, year=2024, source=source, operation="sum", heatmap=False)
     plot.plot(show=True, save=True, format="svg")
 
     # Activity overview
@@ -33,8 +35,16 @@ def main(zip_file: str) -> None:
         "HKQuantityTypeIdentifierAppleStandTime",
     ]
     data = parser.get_flag_records(flag=flags)
-    overview = Overview(data=data, overview_type="activity", year=2024, source=source)
+    overview = Overview(data=data, year=2024, overview_type="activity", source=source)
     overview.plot(show=True, save=True, format="svg")
+
+    # Sleep
+    flag = "HKCategoryTypeIdentifierSleepAnalysis"
+    data = parser.get_flag_records(flag=flag)
+    start_date = "2024-03-01T20:00:00+02:00"
+    end_date = "2024-03-02T08:00:00+02:00"
+    plot = SleepPlot(data=data, year=2024, timerange=(start_date, end_date))
+    plot.plot(show=True, save=True, format="svg")
 
 
 if __name__ == "__main__":

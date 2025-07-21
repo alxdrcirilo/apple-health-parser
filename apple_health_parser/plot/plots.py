@@ -20,6 +20,7 @@ class Plot(PlotInterface):
         Returns:
             Figure: Figure object
         """
+
         if self.ptype is PlotType.HEATMAP:
             fig: Figure = px.imshow(
                 self.dataframe,

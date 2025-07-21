@@ -74,6 +74,13 @@ class PlotInterface(ABC):
             y = "value"
             color = "motion_context"
             legend = "Motion Context"
+
+        elif self.flag == "HKCategoryTypeIdentifierSleepAnalysis":
+            x = "start_date"
+            y = "value"
+            color = "value"
+            legend = "Sleep Stage"
+
         else:
             x = "date"
             y = "value"
@@ -157,7 +164,7 @@ class PlotInterface(ABC):
                 figure.write_html(output_dir / f"{filename}.html")
             else:
                 figure.write_image(
-                    file=output_dir / f"{filename}.{format}", format=format, scale=2
+                    file=output_dir / f"{filename}.{format}", format=format, scale=1
                 )
 
         return figure

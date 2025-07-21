@@ -17,6 +17,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: wagoid/commitlint-github-action@v6
 
   format-release:
@@ -53,6 +55,7 @@ jobs:
           ruff format --check
 
       - name: Python Semantic Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: python-semantic-release/python-semantic-release@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,13 +1,23 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from enum import StrEnum
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, computed_field, field_validator
+from pydantic_extra_types.timezone_name import TimeZoneName
 
 
 class MotionContext(StrEnum):
     UNSET = "0"
     SEDENTARY = "1"
     ACTIVE = "2"
+
+
+class SleepType(StrEnum):
+    IN_BED = "HKCategoryValueSleepAnalysisInBed"
+    AWAKE = "HKCategoryValueSleepAnalysisAwake"
+    CORE = "HKCategoryValueSleepAnalysisAsleepCore"
+    DEEP = "HKCategoryValueSleepAnalysisAsleepDeep"
+    REM = "HKCategoryValueSleepAnalysisAsleepREM"
+    UNSPECIFIED = "HKCategoryValueSleepAnalysisAsleepUnspecified"
 
 
 class HealthData(BaseModel):
@@ -30,7 +40,8 @@ class HealthData(BaseModel):
         description="Version of the source",
         examples=[None, "10.2", "11.0.1"],
     )
-    unit: str = Field(
+    unit: str | None = Field(
+        default=None,
         alias="unit",
         title="Unit",
         description="Unit of the health data",
@@ -54,11 +65,11 @@ class HealthData(BaseModel):
         description="Date of measurement end",
         examples=["2021-01-01 00:00:00 +0200"],
     )
-    value: int | float = Field(
+    value: int | float | str = Field(
         alias="value",
         title="Value",
         description="Value of the health data",
-        examples=[60, 120, 15.5],
+        examples=[60, 120, 15.5, ""],
     )
 
     @field_validator("creation_date", "start_date", "end_date", mode="before")
@@ -68,8 +79,10 @@ class HealthData(BaseModel):
 
     @field_validator("value", mode="before")
     @classmethod
-    def str_to_numeric(cls, v) -> int | float:
+    def validate_value(cls, v) -> int | float | SleepType:
         if type(v) is str:
+            if v in SleepType:
+                return SleepType(v)
             try:
                 return int(v)
             except ValueError:
@@ -90,3 +103,22 @@ class HeartRateData(HealthData):
     @classmethod
     def check_motion_context(cls, v: str) -> str:
         return MotionContext(v).name.lower().capitalize()
+
+
+class SleepData(HealthData):
+    timezone: TimeZoneName | str = Field(
+        alias="timezone",
+        title="Timezone",
+        description="Timezone of the sleep data",
+        examples=["Europe/Amsterdam", "Africa/Cairo"],
+    )
+
+    @computed_field
+    def range(self) -> timedelta:
+        """
+        Get the range of the sleep data.
+
+        Returns:
+            Timedelta: Range of the sleep data
+        """
+        return self.end_date - self.start_date

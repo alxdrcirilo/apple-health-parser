@@ -84,6 +84,7 @@ class TestParser:
 
     def test_map_record_keys_to_flags(self, parser: Parser) -> None:
         flags = [
+            "HKCategoryTypeIdentifierSleepAnalysis",
             "HKQuantityTypeIdentifierActiveEnergyBurned",
             "HKQuantityTypeIdentifierAppleExerciseTime",
             "HKQuantityTypeIdentifierAppleStandTime",
@@ -156,8 +157,8 @@ class TestParser:
         ) as mock_write_csv:
             parser.export(dir_name=tmp_path)
 
-            assert mock_get_flag_records.call_count == 4
-            assert mock_write_csv.call_count == 4
+            assert mock_get_flag_records.call_count == 5
+            assert mock_write_csv.call_count == 5
 
     def test_parsed(self, parser: Parser) -> None:
         flag = "HKQuantityTypeIdentifierHeartRate"
