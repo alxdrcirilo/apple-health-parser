@@ -41,14 +41,15 @@ jobs:
         uses: actions/upload-pages-artifact@v3
 
   deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Print deployed page URL
-        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
