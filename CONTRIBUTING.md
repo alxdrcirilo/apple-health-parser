@@ -1,5 +1,20 @@
 # Contributing
 
+## Development setup
+
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management:
+
+```bash
+# Install dependencies
+make install
+
+# Run all checks (lint, format, type, test)
+make check
+
+# Verify environment setup
+make doctor
+```
+
 ## Code style
 
 Follow the code style of the project.

@@ -4,13 +4,13 @@ You can install the *Apple Health Parser* Python package using your favourite pa
 
 <!-- termynal -->
 ```bash
-$ pip install apple_health_parser
+$ pip install apple-health-parser
 ---> 100%
 Installed using pip!
 
-$ poetry add apple-health-parser
+$ uv add apple-health-parser
 ---> 100%
-Installed using poetry!
+Installed using uv!
 ```
 
 ## Dependencies
