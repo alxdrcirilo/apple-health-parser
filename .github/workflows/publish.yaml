@@ -16,11 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for all tags and branches
+          fetch-depth: 0
       - name: Check conditions
         id: condition-checker
         run: |
-          # Check if the latest commit on main has a tag
           TAG=$(git tag --points-at HEAD)
           if [[ $TAG ]]; then
             echo "This commit has a tag: $TAG"
@@ -37,7 +36,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Build and publish to PyPI
-        uses: JRubics/poetry-publish@v2.0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          python-version: "3.12"
+
+      - name: Build package
+        run: uv build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
