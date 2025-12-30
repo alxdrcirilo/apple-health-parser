@@ -170,3 +170,6 @@ cython_debug/
 
 # macOS
 .DS_Store
+
+# Claude Code
+.claude/
