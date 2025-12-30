@@ -1,4 +1,4 @@
-.PHONY: install clean lint format type test test-fixtures docs doctor help
+.PHONY: install clean lint format type check test test-fixtures docs doctor help
 
 SRC = apple_health_parser
 VENV = .venv
@@ -22,6 +22,8 @@ format: ## Format code
 
 type: ## Type check code
 	uv run mypy $(SRC)
+
+check: lint format type test ## Run all checks (lint, format, type, test)
 
 docs: ## Generate documentation
 	uv run mkdocs serve
