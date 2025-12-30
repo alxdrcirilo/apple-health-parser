@@ -6,6 +6,23 @@
 
 On iOS 17, as mentioned in the [official documentation](https://support.apple.com/guide/iphone/share-your-health-data-iph5ede58c3d/ios), you can export all of your Apple Health data into one zipped file. This can be done by navigating to the *Health* app and then tapping on your profile picture, and then tapping on the *Export All Health Data* button.
 
+## Using the CLI
+
+The quickest way to get started is using the built-in CLI:
+
+```bash
+# Basic usage - generates plots for current year
+cli --zip_file ~/Downloads/export.zip
+
+# Specify a year
+cli --zip_file ~/Downloads/export.zip --year 2024
+
+# Filter by source (e.g., your Apple Watch)
+cli --zip_file ~/Downloads/export.zip --source "My Apple Watch"
+```
+
+The CLI generates walking/running distance plots and activity overview charts. For more control, use the Python API described below.
+
 ## Basics
 
 ### Setting up the parser

@@ -13,7 +13,7 @@ The *Apple Health Parser* Python package simplifies the extraction and analysis 
 
     ---
 
-    Install `apple-health-parser` with `pip` or `poetry` and get up
+    Install `apple-health-parser` with `pip` or `uv` and get up
     and running in a jiffy!
 
     [:octicons-arrow-right-24: Get the package!](installation.md)
