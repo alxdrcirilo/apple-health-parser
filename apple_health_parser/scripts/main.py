@@ -1,3 +1,15 @@
+"""CLI for parsing and plotting Apple Health export data.
+
+This module provides a command-line interface to extract, parse, and visualize
+health data from Apple HealthKit exports. It generates plots for walking/running
+distance and activity overview (calories, exercise time, stand time).
+
+Example usage:
+    $ cli --zip_file ~/Downloads/export.zip
+    $ cli --zip_file ~/Downloads/export.zip --year 2024
+    $ cli --zip_file ~/Downloads/export.zip --source "My Apple Watch"
+"""
+
 from datetime import date
 
 import click
