@@ -111,29 +111,29 @@ class Parser(Loader):
             try:
                 # Heart rate records have additional metadata (motionContext)
                 if flag == "HKQuantityTypeIdentifierHeartRate":
+                    metadata = rec.find("MetadataEntry")
+                    motion_context = (
+                        metadata.attrib.get("value") if metadata is not None else None
+                    )
                     models.append(
                         HeartRateData(
                             **{
                                 **rec.attrib,
-                                **{
-                                    "motionContext": rec.find("MetadataEntry").attrib[
-                                        "value"
-                                    ]
-                                },
+                                "motionContext": motion_context,
                             }
                         )
                     )
                 elif flag == "HKCategoryTypeIdentifierSleepAnalysis":
-                    # Sleep records have additional metadata (value)
+                    # Sleep records may have timezone metadata
+                    metadata = rec.find("MetadataEntry")
+                    timezone = (
+                        metadata.attrib.get("value") if metadata is not None else None
+                    )
                     models.append(
                         SleepData(
                             **{
                                 **rec.attrib,
-                                **{
-                                    "timezone": rec.find("MetadataEntry").attrib[
-                                        "value"
-                                    ]
-                                },
+                                "timezone": timezone,
                             }
                         )
                     )

@@ -12,7 +12,7 @@ from apple_health_parser.exceptions import (
     MissingRecords,
 )
 from apple_health_parser.models.parsed import ParsedData
-from apple_health_parser.models.records import HealthData, HeartRateData
+from apple_health_parser.models.records import HealthData, HeartRateData, SleepData
 from apple_health_parser.utils.parser import Parser
 
 
@@ -180,3 +180,46 @@ class TestParser:
         assert all(
             item in str_records for item in ["Flag", "Sources", "Dates", "Records"]
         )
+
+    def test_build_models_sleep_with_metadata(self, parser: Parser) -> None:
+        """Test parsing sleep records that have timezone metadata."""
+        sleep_models = parser._build_models("HKCategoryTypeIdentifierSleepAnalysis")
+
+        assert len(sleep_models) == 2
+        assert all(isinstance(m, SleepData) for m in sleep_models)
+        assert sleep_models[0].timezone == "Europe/Amsterdam"
+
+    def test_build_models_sleep_missing_metadata(self, tmp_path: Path) -> None:
+        """Test parsing sleep records with missing MetadataEntry (no timezone)."""
+        # Create XML with sleep record missing MetadataEntry
+        xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+        <HealthData locale="en_US">
+            <Record type="HKCategoryTypeIdentifierSleepAnalysis"
+                sourceName="Test iPhone" sourceVersion="17.0"
+                creationDate="2024-01-01 09:00:00 +0000"
+                startDate="2024-01-01 00:00:00 +0000"
+                endDate="2024-01-01 08:00:00 +0000"
+                value="HKCategoryValueSleepAnalysisInBed">
+            </Record>
+        </HealthData>"""
+
+        # Write XML to temp file
+        xml_path = tmp_path / "apple_health_export" / "export.xml"
+        xml_path.parent.mkdir(parents=True, exist_ok=True)
+        xml_path.write_text(xml_content)
+
+        # Create zip file
+        import zipfile
+
+        zip_path = tmp_path / "export.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            zf.write(xml_path, "apple_health_export/export.xml")
+
+        # Parse - should not crash, should handle missing metadata gracefully
+        parser = Parser(export_file=str(zip_path), output_dir=tmp_path, overwrite=True)
+        sleep_models = parser._build_models("HKCategoryTypeIdentifierSleepAnalysis")
+
+        # Should parse the record with None timezone instead of crashing
+        assert len(sleep_models) == 1
+        assert isinstance(sleep_models[0], SleepData)
+        assert sleep_models[0].timezone is None

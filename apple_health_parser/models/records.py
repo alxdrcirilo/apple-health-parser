@@ -106,11 +106,12 @@ class HeartRateData(HealthData):
 
 
 class SleepData(HealthData):
-    timezone: TimeZoneName | str = Field(
+    timezone: TimeZoneName | str | None = Field(
+        default=None,
         alias="timezone",
         title="Timezone",
-        description="Timezone of the sleep data",
-        examples=["Europe/Amsterdam", "Africa/Cairo"],
+        description="Timezone of the sleep data (may be missing in some exports)",
+        examples=["Europe/Amsterdam", "Africa/Cairo", None],
     )
 
     @computed_field
