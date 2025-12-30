@@ -18,12 +18,15 @@ from apple_health_parser.utils.parser import Parser
 
 class TestParser:
     def test_init(self, xml_file: str, export_file: str, tmp_path: Path) -> None:
-        with mock.patch(
-            "apple_health_parser.utils.loader.Loader.extract_zip",
-            return_value=xml_file,
-        ) as mock_extract_zip, mock.patch(
-            "apple_health_parser.utils.parser.Parser._get_records", return_value=[]
-        ) as mock_get_records:
+        with (
+            mock.patch(
+                "apple_health_parser.utils.loader.Loader.extract_zip",
+                return_value=xml_file,
+            ) as mock_extract_zip,
+            mock.patch(
+                "apple_health_parser.utils.parser.Parser._get_records", return_value=[]
+            ) as mock_get_records,
+        ):
             parser = Parser(export_file=export_file, output_dir=tmp_path)
 
             assert parser.xml_file == mock_extract_zip.return_value
@@ -108,13 +111,17 @@ class TestParser:
         assert all(record_keys == i for i in flag_map.values())
 
     def test_get_flag_records(self, parser: Parser) -> None:
-        with mock.patch(
-            "apple_health_parser.utils.parser.Parser._build_models"
-        ) as mock_build_models, mock.patch(
-            "apple_health_parser.utils.parser.Parser._get_dates"
-        ) as mock_get_dates, mock.patch(
-            "apple_health_parser.utils.parser.Parser.get_sources"
-        ) as mock_get_sources:
+        with (
+            mock.patch(
+                "apple_health_parser.utils.parser.Parser._build_models"
+            ) as mock_build_models,
+            mock.patch(
+                "apple_health_parser.utils.parser.Parser._get_dates"
+            ) as mock_get_dates,
+            mock.patch(
+                "apple_health_parser.utils.parser.Parser.get_sources"
+            ) as mock_get_sources,
+        ):
             result = parser.get_flag_records("HKQuantityTypeIdentifierHeartRate")
 
             mock_get_dates.assert_called_once()
@@ -150,11 +157,14 @@ class TestParser:
                 mock_to_csv.assert_not_called()
 
     def test_export(self, parser: Parser, tmp_path: Path) -> None:
-        with mock.patch(
-            "apple_health_parser.utils.parser.Parser.get_flag_records"
-        ) as mock_get_flag_records, mock.patch(
-            "apple_health_parser.utils.parser.Parser.write_csv"
-        ) as mock_write_csv:
+        with (
+            mock.patch(
+                "apple_health_parser.utils.parser.Parser.get_flag_records"
+            ) as mock_get_flag_records,
+            mock.patch(
+                "apple_health_parser.utils.parser.Parser.write_csv"
+            ) as mock_write_csv,
+        ):
             parser.export(dir_name=tmp_path)
 
             assert mock_get_flag_records.call_count == 5

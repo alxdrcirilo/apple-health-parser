@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from datetime import date
 from pathlib import Path
+from typing import cast
 
 import click
 import pandas as pd
@@ -206,8 +207,8 @@ class Parser(Loader):
         """
 
         def _get_parsed_data(flag: str) -> ParsedData:
-            sources = self.get_sources(flag=flag)
-            devices = self.get_devices(flag=flag)
+            sources = cast(list[str], self.get_sources(flag=flag))
+            devices = cast(list[str], self.get_devices(flag=flag))
             models = self._build_models(flag=flag)
             dates = self._get_dates(models=models)
             records = pd.DataFrame([model.model_dump() for model in models])
@@ -346,4 +347,4 @@ class Parser(Loader):
             filename = f"{dir_name}/{flag}.csv"
             self.write_csv(data=parsed, filename=filename)
 
-            logger.info(f"Exported {n+1}/{len(self.flags)} flags to {filename}")
+            logger.info(f"Exported {n + 1}/{len(self.flags)} flags to {filename}")
