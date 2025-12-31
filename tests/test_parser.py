@@ -93,22 +93,31 @@ class TestParser:
             "HKQuantityTypeIdentifierAppleStandTime",
             "HKQuantityTypeIdentifierHeartRate",
         ]
-        record_keys = {
-            "device",
+        # Common keys present in all record types
+        common_keys = {
             "type",
             "startDate",
             "value",
             "sourceName",
             "endDate",
             "creationDate",
-            "sourceVersion",
-            "unit",
         }
+
         flag_map = parser._map_record_keys_to_flags()
-        # Check if the flags are in the flag_map
+
+        # Check if all flags are in the flag_map
         assert sorted(flag_map.keys()) == flags
-        # Check if the record keys are as expected
-        assert all(record_keys == i for i in flag_map.values())
+
+        # Check that each flag has at least the common keys
+        for flag, keys in flag_map.items():
+            assert common_keys.issubset(keys), f"{flag} missing common keys"
+
+        # Verify specific flags have expected keys (not all have device/unit)
+        assert "device" in flag_map["HKQuantityTypeIdentifierHeartRate"]
+        assert "unit" in flag_map["HKQuantityTypeIdentifierActiveEnergyBurned"]
+        # Sleep records don't have device or unit attributes
+        assert "device" not in flag_map["HKCategoryTypeIdentifierSleepAnalysis"]
+        assert "unit" not in flag_map["HKCategoryTypeIdentifierSleepAnalysis"]
 
     def test_get_flag_records(self, parser: Parser) -> None:
         with (
@@ -223,3 +232,44 @@ class TestParser:
         assert len(sleep_models) == 1
         assert isinstance(sleep_models[0], SleepData)
         assert sleep_models[0].timezone is None
+
+    def test_map_record_keys_to_flags_without_active_energy(
+        self, tmp_path: Path
+    ) -> None:
+        """Test _map_record_keys_to_flags works when ActiveEnergyBurned flag is missing."""
+        # Create XML with only HeartRate records (no ActiveEnergyBurned)
+        xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+        <HealthData locale="en_US">
+            <Record type="HKQuantityTypeIdentifierHeartRate"
+                sourceName="Test Watch" sourceVersion="10.0"
+                device="&lt;&lt;HKDevice&gt;, name:Apple Watch&gt;"
+                unit="count/min"
+                creationDate="2024-01-01 09:00:00 +0000"
+                startDate="2024-01-01 09:00:00 +0000"
+                endDate="2024-01-01 09:00:00 +0000"
+                value="72">
+                <MetadataEntry key="HKMetadataKeyHeartRateMotionContext" value="0" />
+            </Record>
+        </HealthData>"""
+
+        # Write XML to temp file
+        xml_path = tmp_path / "apple_health_export" / "export.xml"
+        xml_path.parent.mkdir(parents=True, exist_ok=True)
+        xml_path.write_text(xml_content)
+
+        # Create zip file
+        import zipfile
+
+        zip_path = tmp_path / "export.zip"
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            zf.write(xml_path, "apple_health_export/export.xml")
+
+        # Parse - should not crash when ActiveEnergyBurned is missing
+        parser = Parser(export_file=str(zip_path), output_dir=tmp_path, overwrite=True)
+
+        # This should work without KeyError
+        flag_map = parser._map_record_keys_to_flags()
+
+        # Verify it returns keys for the actual flag, not hardcoded one
+        assert "HKQuantityTypeIdentifierHeartRate" in flag_map
+        assert len(flag_map["HKQuantityTypeIdentifierHeartRate"]) > 0

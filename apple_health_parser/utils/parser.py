@@ -184,11 +184,7 @@ class Parser(Loader):
             dict[str, set]: Dictionary with flags as keys and set of record keys as values
         """
         return {
-            flag: {
-                k
-                for rec in self.records["HKQuantityTypeIdentifierActiveEnergyBurned"]
-                for k in rec.attrib.keys()
-            }
+            flag: {k for rec in self.records[flag] for k in rec.attrib.keys()}
             for flag in self.flags
         }
 
