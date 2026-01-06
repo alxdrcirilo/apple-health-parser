@@ -97,3 +97,26 @@ print(data)
 ```
 
 In this particular case, the parser found a total of 117603 records, 117603 dates, all coming from 3 different sources.
+
+### Exporting data to CSV files
+
+Once you have parsed your data, you can export all parsed data to CSV files using the `export` method. This method will create a directory and export each health data flag to its own CSV file.
+
+```python
+# Export all parsed data to CSV files in a directory called 'health_data_export'
+parser.export(dir_name="health_data_export")
+```
+
+The export method will:
+
+1. Create the specified directory if it doesn't exist
+2. Generate a separate CSV file for each health data flag (e.g., `HKQuantityTypeIdentifierHeartRate.csv`, `HKQuantityTypeIdentifierStepCount.csv`, etc.)
+3. Export all records for each flag, including data from all sources and devices
+
+For example, if your Apple Health data contains heart rate, step count, and oxygen saturation, the export will create:
+
+- `health_data_export/HKQuantityTypeIdentifierHeartRate.csv`
+- `health_data_export/HKQuantityTypeIdentifierStepCount.csv`
+- `health_data_export/HKQuantityTypeIdentifierOxygenSaturation.csv`
+
+Each CSV file contains all the parsed records with their timestamps, values, sources, and other metadata, making it easy to analyze your health data in spreadsheet software or other data analysis tools.
