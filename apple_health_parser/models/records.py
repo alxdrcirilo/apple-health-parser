@@ -93,6 +93,7 @@ class HealthData(BaseModel):
 class HeartRateData(HealthData):
     device: str = Field(title="Device", description="Device used for measurement")
     motion_context: str = Field(
+        default="0",
         alias="motionContext",
         title="Motion Context",
         description="Context of motion (e.g. sedentary, active, unset)",

@@ -108,8 +108,8 @@ class Parser(Loader):
 
         for rec in self.records[flag]:
             try:
-                # Heart rate records have additional metadata (motionContext)
-                if flag == "HKQuantityTypeIdentifierHeartRate":
+                # Heart rate records can have additional metadata (motionContext)
+                if flag == "HKQuantityTypeIdentifierHeartRate" and rec.find("MetadataEntry"):
                     models.append(
                         HeartRateData(
                             **{
