@@ -45,11 +45,11 @@ class TestOverviews:
         fig = overview.plot(show=False, save=False)
         assert isinstance(fig, Figure)
 
-        with mock.patch("plotly.graph_objs.Figure.show") as mock_show, mock.patch(
-            "plotly.graph_objs.Figure.write_html"
-        ) as mock_write_html, mock.patch(
-            "plotly.graph_objs.Figure.write_image"
-        ) as mock_write_image:
+        with (
+            mock.patch("plotly.graph_objs.Figure.show") as mock_show,
+            mock.patch("plotly.graph_objs.Figure.write_html") as mock_write_html,
+            mock.patch("plotly.graph_objs.Figure.write_image") as mock_write_image,
+        ):
             overview.plot(show=True, save=False)
             mock_show.assert_called_once()
 

@@ -50,7 +50,7 @@ class Loader:
         file_size = zip_file.stat().st_size
         dir_size = sum(f.stat().st_size for f in output_dir.glob("**/*") if f.is_file())
         logger.info(f"Compressed: {file_size / 1e6:.2f} MB")
-        logger.info(f"Uncompressed: {dir_size/ 1e6:.2f} MB")
+        logger.info(f"Uncompressed: {dir_size / 1e6:.2f} MB")
 
         return (export_dir / "export.xml").resolve()
 

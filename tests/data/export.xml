@@ -13,6 +13,12 @@
         startDate="2024-01-01 01:01:36 +0200" endDate="2024-01-01 01:01:36 +0200" value="74">
         <MetadataEntry key="HKMetadataKeyHeartRateMotionContext" value="0" />
     </Record>
+    <Record type="HKQuantityTypeIdentifierHeartRate" sourceName="Alexandre's Apple Watch"
+        sourceVersion="10.2"
+        device="&lt;&lt;HKDevice: 0x3012772a0&gt;, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.2&gt;"
+        unit="count/min" creationDate="2024-01-01 01:01:43 +0200"
+        startDate="2024-01-01 01:01:37 +0200" endDate="2024-01-01 01:01:37 +0200" value="75">
+    </Record>
     <Record type="HKQuantityTypeIdentifierActiveEnergyBurned" sourceName="Alexandre's Apple Watch"
         sourceVersion="10.2"
         device="&lt;&lt;HKDevice: 0x3008d6850&gt;, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.2&gt;"

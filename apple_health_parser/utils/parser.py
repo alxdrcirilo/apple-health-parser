@@ -109,18 +109,13 @@ class Parser(Loader):
         for rec in self.records[flag]:
             try:
                 # Heart rate records can have additional metadata (motionContext)
-                if flag == "HKQuantityTypeIdentifierHeartRate" and rec.find("MetadataEntry"):
+                if flag == "HKQuantityTypeIdentifierHeartRate":
+                    if rec.find("MetadataEntry") is not None:
+                        motion_context = rec.find("MetadataEntry").attrib["value"]
+                    else:
+                        motion_context = None
                     models.append(
-                        HeartRateData(
-                            **{
-                                **rec.attrib,
-                                **{
-                                    "motionContext": rec.find("MetadataEntry").attrib[
-                                        "value"
-                                    ]
-                                },
-                            }
-                        )
+                        HeartRateData(**rec.attrib, motionContext=motion_context)
                     )
                 elif flag == "HKCategoryTypeIdentifierSleepAnalysis":
                     # Sleep records have additional metadata (value)
@@ -346,4 +341,4 @@ class Parser(Loader):
             filename = f"{dir_name}/{flag}.csv"
             self.write_csv(data=parsed, filename=filename)
 
-            logger.info(f"Exported {n+1}/{len(self.flags)} flags to {filename}")
+            logger.info(f"Exported {n + 1}/{len(self.flags)} flags to {filename}")
