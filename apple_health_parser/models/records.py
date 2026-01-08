@@ -92,7 +92,8 @@ class HealthData(BaseModel):
 
 class HeartRateData(HealthData):
     device: str = Field(title="Device", description="Device used for measurement")
-    motion_context: str = Field(
+    motion_context: str | None = Field(
+        default=None,
         alias="motionContext",
         title="Motion Context",
         description="Context of motion (e.g. sedentary, active, unset)",
@@ -101,8 +102,8 @@ class HeartRateData(HealthData):
 
     @field_validator("motion_context", mode="before")
     @classmethod
-    def check_motion_context(cls, v: str) -> str:
-        return MotionContext(v).name.lower().capitalize()
+    def check_motion_context(cls, v: str | None) -> str | None:
+        return None if v is None else MotionContext(v).name.lower().capitalize()
 
 
 class SleepData(HealthData):
