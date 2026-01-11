@@ -8,10 +8,10 @@ from apple_health_parser.utils.parser import Parser
 @click.option("--zip_file", help="Path to the Apple Health export.zip file")
 @click.option(
     "--dir_name",
-    default=None,
-    help="Directory to export the CSV files to. If None, uses the current directory",
+    default=".",
+    help="Directory to export the CSV files to, defaults to current directory",
 )
-def main(zip_file: str, dir_name: str | None) -> None:
+def main(zip_file: str, dir_name: str) -> None:
     """
     CLI to export data from the Apple Health export file to CSV files.
     """

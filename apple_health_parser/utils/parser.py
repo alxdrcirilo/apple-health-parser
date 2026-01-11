@@ -319,7 +319,7 @@ class Parser(Loader):
         logger.info(f"Parsed data written to {filepath}")
 
     @timeit
-    def export(self, dir_name: str = ".") -> None:
+    def export(self, dir_name: str) -> None:
         """
         Export all parsed data to multiple CSV files.
 
