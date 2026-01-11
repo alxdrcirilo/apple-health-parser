@@ -1,6 +1,6 @@
 # Tutorial
 
-*Apple Health Parser* comes with a handy CLI (*command-line interface*). But if you'd rather write a short script to get parse your Apple Health data, that is also possible.
+*Apple Health Parser* comes with a handy CLI (*command-line interface*). But if you'd rather write a short script to get parse your Apple Health data, that is also possible. Check the [CLI](cli.md) tutorial for more information.
 
 ## Exporting Apple Health data
 

@@ -29,7 +29,7 @@ ruff = "^0.4.4"
 termynal = "^0.12.1"
 
 [tool.poetry.scripts]
-cli = "apple_health_parser.scripts.main:main"
+apple-health-parser-cli = "apple_health_parser.scripts.main:main"
 
 [tool.coverage.run]
 omit = [
