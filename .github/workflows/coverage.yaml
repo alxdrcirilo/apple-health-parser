@@ -31,8 +31,8 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=apple_health_parser
-          coverage lcov
+          uv run pytest --cov=apple_health_parser
+          uv run coverage lcov
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2.1.0
