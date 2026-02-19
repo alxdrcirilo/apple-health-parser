@@ -205,6 +205,7 @@ class Parser(Loader):
             devices = self.get_devices(flag=flag)
             models = self._build_models(flag=flag)
             dates = self._get_dates(models=models)
+
             records = pd.DataFrame([model.model_dump() for model in models])
             return ParsedData(
                 flag=flag,

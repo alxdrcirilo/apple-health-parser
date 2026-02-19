@@ -10,8 +10,7 @@
 ![pypi - version](https://img.shields.io/pypi/v/apple-health-parser)
 [![coverage](https://coveralls.io/repos/github/alxdrcirilo/apple-health-parser/badge.svg?branch=main)](https://coveralls.io/github/alxdrcirilo/apple-health-parser?branch=main)
 [![python version](https://img.shields.io/badge/python-3.11|3.12-blue)](https://www.python.org/)
-[![poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
-[![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 ![pypi - downloads](https://img.shields.io/pypi/dm/apple-health-parser)
 [![license](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

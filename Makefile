@@ -1,32 +1,32 @@
-.PHONY: install venv clean format test test-fixtures help
+.PHONY: install venv clean format lint test test-fixtures help
 
 SRC = apple_health_parser
 VENV = .venv
 TESTS = tests
 MYPY_CACHE = .mypy_cache
 
-install: ## Create virtual environment
-	poetry install
-
-venv: install ## Activate virtual environment
-	poetry env activate
+install: ## Run the application
+	uv sync
 
 clean: ## Clean up
 	pyclean . --debris
 	rm -rf $(MYPY_CACHE) $(VENV)
 
-format: venv ## Format code
+lint: install ## Lint code with ruff
+	ruff check $(SRC) $(TESTS)
+
+format: install ## Format and auto-fix code with ruff
 	ruff check --fix $(SRC) $(TESTS)
 	ruff format $(SRC) $(TESTS)
 
-docs: venv ## Generate documentation
+docs: install ## Generate documentation
 	mkdocs serve
 
-test: venv ## Run tests
-	pytest -sx $(TESTS) --cov=$(SRC) --cov-report=term-missing --cov-report=html
+test: install ## Run tests
+	uv run pytest -sx $(TESTS) --cov=$(SRC) --cov-report=term-missing --cov-report=html
 
-test-fixtures: venv ## Show tests fixtures
-	pytest --fixtures
+test-fixtures: install ## Show tests fixtures
+	uv run pytest --fixtures
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
