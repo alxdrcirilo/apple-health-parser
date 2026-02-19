@@ -19,8 +19,8 @@ def test_cli_without_args():
         capture_output=True,
         text=True,
     )
-    assert result.returncode == 0
-    assert "Usage:" in result.stdout
+    assert result.returncode == 2
+    assert "Usage:" in result.stderr
 
 
 def test_cli_invalid_option():

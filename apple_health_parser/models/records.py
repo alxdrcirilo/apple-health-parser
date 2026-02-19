@@ -81,7 +81,7 @@ class HealthData(BaseModel):
     @classmethod
     def validate_value(cls, v) -> int | float | SleepType:
         if type(v) is str:
-            if v in SleepType:
+            if v in [e.value for e in SleepType]:
                 return SleepType(v)
             try:
                 return int(v)
