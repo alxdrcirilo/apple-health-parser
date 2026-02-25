@@ -1,8 +1,10 @@
-import xml.etree.ElementTree as ET
+from collections import defaultdict
 from datetime import date
 from pathlib import Path
+from typing import overload
 
 import click
+import lxml.etree as ET
 import pandas as pd
 from pydantic import ValidationError
 
@@ -51,42 +53,27 @@ class Parser(Loader):
             zip_file=export_file, output_dir=output_dir, overwrite=overwrite
         )
         self.records = self._get_records()
+        self.flags = list(self.records.keys()) if self.records else []
 
     @timeit
-    def _get_records(self) -> dict[str, list[ET.Element]]:
+    def _get_records(self) -> defaultdict[str, list[ET.Element]]:
         """
         Get records from the Apple Health export file.
         The records are grouped by flags as keys and list of records as values.
 
         Returns:
-            dict[str, list[ET.Element]]: Records from the export.xml file
+            defaultdict[str, list[ET.Element]]: Records from the export.xml file
         """
         data = self.read_xml(self.xml_file)
-
-        self.flags = self._get_flags(data)
-        records = {
-            flag: [rec for rec in data if rec.attrib["type"] == flag]
-            for flag in self.flags
-        }
-
+        records: defaultdict[str, list[ET.Element]] = defaultdict(list)
+        for rec in data:
+            # Match record "type" to flag
+            records[rec.attrib["type"]].append(rec)
         record_count = sum(len(rec) for rec in records.values())
         logger.info(
             f"Processed {len(records.keys())} flags with {record_count:,} records"
         )
-
         return records
-
-    def _get_flags(self, data: list[ET.Element]) -> list[str]:
-        """
-        Get flags from the Apple Health records.
-
-        Args:
-            data (list[ET.Element]): List of records from the export.xml file
-
-        Returns:
-            list[str]: Sorted list of flags
-        """
-        return sorted({rec.attrib["type"] for rec in data})
 
     def _build_models(self, flag: str) -> list:
         """
@@ -186,6 +173,10 @@ class Parser(Loader):
             for flag in self.flags
         }
 
+    @overload
+    def get_flag_records(self, flag: str) -> ParsedData: ...
+    @overload
+    def get_flag_records(self, flag: list[str]) -> dict[str, ParsedData]: ...
     @timeit
     def get_flag_records(
         self, flag: str | list[str]

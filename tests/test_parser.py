@@ -1,8 +1,8 @@
 from datetime import date
 from pathlib import Path
 from unittest import mock
-from xml.etree import ElementTree as ET
 
+import lxml.etree as ET
 import pandas as pd
 import pytest
 
@@ -24,7 +24,8 @@ class TestParser:
                 return_value=xml_file,
             ) as mock_extract_zip,
             mock.patch(
-                "apple_health_parser.utils.parser.Parser._get_records", return_value=[]
+                "apple_health_parser.utils.parser.Parser._get_records",
+                return_value=[],
             ) as mock_get_records,
         ):
             parser = Parser(export_file=export_file, output_dir=tmp_path)
