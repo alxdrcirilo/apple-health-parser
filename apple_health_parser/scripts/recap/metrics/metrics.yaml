@@ -1,0 +1,77 @@
+HKQuantityTypeIdentifierDistanceWalkingRunning:
+  axis_label: Distance (km)
+  color: "#0179fe"
+  description: Sum of distance walking/running per week, in kilometers. Gives an overview of the physical activity related to walking and running.
+  flag: HKQuantityTypeIdentifierDistanceWalkingRunning
+  marker_color: "#2e91e5"
+  name: Distance Walking/Running
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you covered a total distance of **{dist_total:.2f} km**. On average, you traveled **{dist_avg:.2f} km** per day, with a median daily distance of **{dist_median:.2f} km**. Your shortest day saw **{dist_min:.2f} km**, while your longest reached **{dist_max:.2f} km**. In total, you were active on **{dist_count} days**.
+  unit: km
+
+HKQuantityTypeIdentifierDistanceCycling:
+  axis_label: Distance (km)
+  color: "#0179fe"
+  description: Sum of distance cycling per week, in kilometers. Provides insights into cycling activity and trends over the year.
+  flag: HKQuantityTypeIdentifierDistanceCycling
+  marker_color: "#2e91e5"
+  name: Distance Cycling
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you covered a total distance of **{dist_total:.2f} km**. On average, you traveled **{dist_avg:.2f} km** per day, with a median daily distance of **{dist_median:.2f} km**. Your shortest day saw **{dist_min:.2f} km**, while your longest reached **{dist_max:.2f} km**. In total, you were active on **{dist_count} days**.
+  unit: km
+
+HKQuantityTypeIdentifierRestingHeartRate:
+  axis_label: Resting Heart Rate (bpm)
+  color: "#ea4a62"
+  description: Average resting heart rate per day, in beats per minute (bpm). Provides insights into cardiovascular health and fitness levels.
+  flag: HKQuantityTypeIdentifierRestingHeartRate
+  marker_color: "#1c91c0"
+  name: Resting Heart Rate
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average resting heart rate was **{dist_avg:.2f} bpm**. Your median resting heart rate was **{dist_median:.2f} bpm**. Your lowest recorded resting heart rate was **{dist_min:.2f} bpm**, while your highest reached **{dist_max:.2f} bpm**. In total, you have **{dist_count} days** of resting heart rate data.
+  unit: bpm
+
+HKQuantityTypeIdentifierActiveEnergyBurned:
+  axis_label: Active Energy Burned (kcal)
+  color: "#ff7043"
+  description: Sum of active energy burned per week, in kilocalories. Reflects calories burned through movement and exercise.
+  flag: HKQuantityTypeIdentifierActiveEnergyBurned
+  marker_color: "#ffa726"
+  name: Active Energy Burned
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you burned a total of **{dist_total:.2f} kcal** through activity. On average, you burned **{dist_avg:.2f} kcal** per day, with a median daily burn of **{dist_median:.2f} kcal**. Your lowest active burn day was **{dist_min:.2f} kcal**, and your highest was **{dist_max:.2f} kcal**. You have **{dist_count} days** of active energy data.
+  unit: kcal
+
+HKQuantityTypeIdentifierVO2Max:
+  axis_label: VO2 Max (ml/kg/min)
+  color: "#ea4a62"
+  description: Average VO2 Max per day, in milliliters of oxygen per kilogram of body weight per minute (ml/kg/min). Provides insights into cardiovascular fitness and aerobic endurance.
+  flag: HKQuantityTypeIdentifierVO2Max
+  marker_color: "#1c91c0"
+  name: VO2 Max
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average VO2 Max was **{dist_avg:.2f} ml/kg/min**. Your median VO2 Max was **{dist_median:.2f} ml/kg/min**. Your lowest recorded VO2 Max was **{dist_min:.2f} ml/kg/min**, while your highest reached **{dist_max:.2f} ml/kg/min**. In total, you have **{dist_count} days** of VO2 Max data.
+  unit: ml/kg/min
+
+HKQuantityTypeIdentifierTimeInDaylight:
+  axis_label: Time in Daylight (minutes)
+  color: "#1a237e"
+  description: Total time spent in daylight per day, in minutes. Provides insights into outdoor activity and exposure to natural light.
+  flag: HKQuantityTypeIdentifierTimeInDaylight
+  marker_color: "#1c91c0"
+  name: Time in Daylight
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you spent a total of **{dist_total:.2f} minutes** in daylight. On average, you spent **{dist_avg:.2f} minutes** in daylight per day, with a median daily time of **{dist_median:.2f} minutes**. Your shortest day in daylight was **{dist_min:.2f} minutes**, while your longest reached **{dist_max:.2f} minutes**. In total, you have **{dist_count} days** of daylight exposure data.
+  unit: minutes

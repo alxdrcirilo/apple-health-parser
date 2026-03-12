@@ -41,15 +41,22 @@ class Plot(PlotInterface):
                 height=150
                 + 15 * (self.dataframe.index.max() - self.dataframe.index.min() + 1),
             )
+            fig.update_traces(
+                # This is required to avoid the interpolation of the heatmap, which can cause issues with the visualization of the data
+                zsmooth=False,
+                xgap=0.1,
+                ygap=0.1,
+            )
 
             fig.update_coloraxes(showscale=False)
             fig.update_xaxes(
                 title="Day of the Month",
                 tickvals=list(range(1, 32)),
+                tickangle=-90,
                 showline=True,
                 linewidth=1,
                 linecolor="black",
-                mirror=True,
+                mirror=False,
             )
             fig.update_yaxes(
                 title="Month",
@@ -62,7 +69,7 @@ class Plot(PlotInterface):
                 showline=True,
                 linewidth=1,
                 linecolor="black",
-                mirror=True,
+                mirror=False,
             )
 
         else:

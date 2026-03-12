@@ -31,7 +31,7 @@ dev = [
 ]
 
 [project.scripts]
-apple-health-parser-cli = "apple_health_parser.scripts.main:main"
+apple-health-parser-cli = "apple_health_parser.scripts.export.main:main"
 apple-health-parser-year-recap = "apple_health_parser.scripts.recap.main:main"
 
 [build-system]
