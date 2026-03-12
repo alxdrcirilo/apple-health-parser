@@ -53,6 +53,7 @@ nav:
   - Installation: "installation.md"
   - Tutorial:
       - Basics: "tutorial/basics.md"
+      - Scripts: "tutorial/scripts.md"
       - Plots: "tutorial/plots.md"
   - Usage:
       - Exceptions: "usage/exceptions.md"

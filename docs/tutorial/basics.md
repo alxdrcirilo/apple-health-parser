@@ -1,10 +1,10 @@
 # Tutorial
 
-*Apple Health Parser* comes with a handy CLI (*command-line interface*). But if you'd rather write a short script to get parse your Apple Health data, that is also possible. Check the [CLI](cli.md) tutorial for more information.
+**Apple Health Parser** comes with a two scripts to help you export your Apple Health data to CSV files and to generate a year recap of your health data. You can find more information about these scripts in the [scripts tutorial](./scripts.md).
 
 ## Exporting Apple Health data
 
-On iOS 17, as mentioned in the [official documentation](https://support.apple.com/guide/iphone/share-your-health-data-iph5ede58c3d/ios), you can export all of your Apple Health data into one zipped file. This can be done by navigating to the *Health* app and then tapping on your profile picture, and then tapping on the *Export All Health Data* button.
+On iOS 17, as mentioned in the [official documentation](https://support.apple.com/guide/iphone/share-your-health-data-iph5ede58c3d/ios), you can export all of your Apple Health data into one zipped file. This can be done by navigating to the _Health_ app and then tapping on your profile picture, and then tapping on the _Export All Health Data_ button.
 
 ## Basics
 
@@ -37,7 +37,7 @@ print(parser.flags)
 
 ### Listing the sources
 
-*Apple Health* data can originate from various sources, most commonly this will be your *iPhone* or *Apple Watch*. But they can also come from third-party providers (e.g. a GymKit-compatible threadmill).
+_Apple Health_ data can originate from various sources, most commonly this will be your _iPhone_ or _Apple Watch_. But they can also come from third-party providers (e.g. a GymKit-compatible threadmill).
 
 #### For a single flag
 

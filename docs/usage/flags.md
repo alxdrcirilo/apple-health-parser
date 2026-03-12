@@ -26,19 +26,19 @@ There are 42 flags defined in *Apple Health Parser* at the moment.
 | `HKQuantityTypeIdentifierCyclingSpeed`                    | Cycling Speed                      | km/h        | #000000 | viridis  |
 | `HKQuantityTypeIdentifierDistanceCycling`                 | Distance Cycling                   | km          | #000000 | viridis  |
 | `HKQuantityTypeIdentifierDistanceWalkingRunning`          | Distance Walking Running           | km          | #000000 | oryel    |
-| `HKQuantityTypeIdentifierEnvironmentalAudioExposure`      | Audio Exposure                     | db          | \None"  | viridis  |
+| `HKQuantityTypeIdentifierEnvironmentalAudioExposure`      | Audio Exposure                     | db          | #000000  | viridis  |
 | `HKQuantityTypeIdentifierEnvironmentalSoundReduction`     | Environmental Sound Reduction      | db          | #000000 | viridis  |
 | `HKQuantityTypeIdentifierFlightsClimbed`                  | Flights Climbed                    | count       | #000000 | viridis  |
 | `HKQuantityTypeIdentifierHeadphoneAudioExposure`          | Headphone Audio Exposure           | db          | #000000 | viridis  |
-| `HKQuantityTypeIdentifierHeartRate`                       | Heart Rate                         | bpm         | \None"  | RdYlGn_r |
+| `HKQuantityTypeIdentifierHeartRate`                       | Heart Rate                         | bpm         | #000000  | RdYlGn_r |
 | `HKQuantityTypeIdentifierHeartRateRecoveryOneMinute`      | Heart Rate Recovery (1 min)        | bpm         | #000000 | viridis  |
 | `HKQuantityTypeIdentifierHeartRateVariabilitySDNN`        | Heart Rate Variability (SDNN)      | ms          | #000000 | viridis  |
 | `HKQuantityTypeIdentifierHeight`                          | Height                             | cm          | #000000 | viridis  |
 | `HKQuantityTypeIdentifierLeanBodyMass`                    | Lean Body Mass                     | kg          | #000000 | viridis  |
-| `HKQuantityTypeIdentifierOxygenSaturation`                | Oxygen Saturation                  | \%          | \None"  | RdBu_r   |
+| `HKQuantityTypeIdentifierOxygenSaturation`                | Oxygen Saturation                  | \%          | #000000  | RdBu_r   |
 | `HKQuantityTypeIdentifierPhysicalEffort`                  | Physical Effort                    | unit        | #000000 | viridis  |
 | `HKQuantityTypeIdentifierRespiratoryRate`                 | Respiratory Rate                   | breaths/min | #000000 | viridis  |
-| `HKQuantityTypeIdentifierRestingHeartRate`                | Resting Heart Rate                 | bpm         | \None"  | RdYlGn_r |
+| `HKQuantityTypeIdentifierRestingHeartRate`                | Resting Heart Rate                 | bpm         | #000000  | RdYlGn_r |
 | `HKQuantityTypeIdentifierRunningGroundContactTime`        | Running Ground Contact Time        | ms          | #000000 | viridis  |
 | `HKQuantityTypeIdentifierRunningPower`                    | Running Power                      | watts       | #000000 | viridis  |
 | `HKQuantityTypeIdentifierRunningSpeed`                    | Running Speed                      | km/h        | #000000 | viridis  |
@@ -68,19 +68,19 @@ There are 42 flags defined in *Apple Health Parser* at the moment.
 | HKQuantityTypeIdentifierCyclingSpeed                    | Cycling Speed                      | km/h        | #000000 | viridis  |
 | HKQuantityTypeIdentifierDistanceCycling                 | Distance Cycling                   | km          | #000000 | viridis  |
 | HKQuantityTypeIdentifierDistanceWalkingRunning          | Distance Walking Running           | km          | #000000 | oryel    |
-| HKQuantityTypeIdentifierEnvironmentalAudioExposure      | Audio Exposure                     | db          |  None   | viridis  |
+| HKQuantityTypeIdentifierEnvironmentalAudioExposure      | Audio Exposure                     | db          | #000000 | viridis  |
 | HKQuantityTypeIdentifierEnvironmentalSoundReduction     | Environmental Sound Reduction      | db          | #000000 | viridis  |
 | HKQuantityTypeIdentifierFlightsClimbed                  | Flights Climbed                    | count       | #000000 | viridis  |
 | HKQuantityTypeIdentifierHeadphoneAudioExposure          | Headphone Audio Exposure           | db          | #000000 | viridis  |
-| HKQuantityTypeIdentifierHeartRate                       | Heart Rate                         | bpm         |  None   | RdYlGn_r |
+| HKQuantityTypeIdentifierHeartRate                       | Heart Rate                         | bpm         | #000000 | RdYlGn_r |
 | HKQuantityTypeIdentifierHeartRateRecoveryOneMinute      | Heart Rate Recovery (1 min)        | bpm         | #000000 | viridis  |
 | HKQuantityTypeIdentifierHeartRateVariabilitySDNN        | Heart Rate Variability (SDNN)      | ms          | #000000 | viridis  |
 | HKQuantityTypeIdentifierHeight                          | Height                             | cm          | #000000 | viridis  |
 | HKQuantityTypeIdentifierLeanBodyMass                    | Lean Body Mass                     | kg          | #000000 | viridis  |
-| HKQuantityTypeIdentifierOxygenSaturation                | Oxygen Saturation                  | \%          |  None   | RdBu_r   |
+| HKQuantityTypeIdentifierOxygenSaturation                | Oxygen Saturation                  | \%          | #000000 | RdBu_r   |
 | HKQuantityTypeIdentifierPhysicalEffort                  | Physical Effort                    | unit        | #000000 | viridis  |
 | HKQuantityTypeIdentifierRespiratoryRate                 | Respiratory Rate                   | breaths/min | #000000 | viridis  |
-| HKQuantityTypeIdentifierRestingHeartRate                | Resting Heart Rate                 | bpm         |  None   | RdYlGn_r |
+| HKQuantityTypeIdentifierRestingHeartRate                | Resting Heart Rate                 | bpm         | #000000 | RdYlGn_r |
 | HKQuantityTypeIdentifierRunningGroundContactTime        | Running Ground Contact Time        | ms          | #000000 | viridis  |
 | HKQuantityTypeIdentifierRunningPower                    | Running Power                      | watts       | #000000 | viridis  |
 | HKQuantityTypeIdentifierRunningSpeed                    | Running Speed                      | km/h        | #000000 | viridis  |

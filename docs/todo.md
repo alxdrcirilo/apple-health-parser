@@ -12,6 +12,10 @@
 - [x] Filter by source (e.g. "Apple Watch")
 - [x] Get list of devices
 
+## Scripts
+
+- [ ] Make the year recap script more customizable (e.g. allow to specify which plots to include)
+
 ## Tests
 
 - [x] Add missing tests
