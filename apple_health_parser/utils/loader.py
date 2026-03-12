@@ -1,11 +1,12 @@
 import re
 from pathlib import Path
 from shutil import rmtree
-from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
 import click
+import lxml.etree as ET
 
+from apple_health_parser.decorators import timeit
 from apple_health_parser.utils.logging import logger
 
 
@@ -75,6 +76,7 @@ class Loader:
                 logger.warning(f"Deleted previous export at {output_dir}...")
 
     @staticmethod
+    @timeit
     def read_xml(xml_file: Path) -> list[ET.Element]:
         """
         Read an XML file and return the root element.
@@ -83,7 +85,7 @@ class Loader:
             xml_file (Path): Path to the XML file
 
         Returns:
-            list[ET.Element]: List of records (ET.Element)
+            list[ET.Element]: List of records
         """
         logger.info(f"Processing {xml_file}...")
         with open(xml_file, "r") as file:

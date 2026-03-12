@@ -1,8 +1,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import mock
-from xml.etree import ElementTree as ET
 from zipfile import ZipFile
+
+import lxml.etree as ET
 
 from apple_health_parser.utils.loader import Loader
 

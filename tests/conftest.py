@@ -1,6 +1,6 @@
 from pathlib import Path
-from xml.etree import ElementTree as ET
 
+import lxml.etree as ET
 import pytest
 
 from apple_health_parser.utils.parser import Parser

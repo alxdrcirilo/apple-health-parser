@@ -8,7 +8,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "click>=8.3.1",
-    "kaleido>=1.2.0",
+    "fpdf2>=2.8.6",
+    "kaleido==0.2.1",
+    "lxml>=6.0.2",
     "pandas>=3.0.1",
     "plotly>=6.5.2",
     "pydantic>=2.12.5",
@@ -30,6 +32,7 @@ dev = [
 
 [project.scripts]
 apple-health-parser-cli = "apple_health_parser.scripts.main:main"
+apple-health-parser-year-recap = "apple_health_parser.scripts.recap.main:main"
 
 [build-system]
 requires = ["uv", "setuptools"]
