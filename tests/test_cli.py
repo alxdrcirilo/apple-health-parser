@@ -4,7 +4,7 @@ import subprocess
 def test_cli_help():
     """Very simple test - just check that CLI help works without errors."""
     result = subprocess.run(
-        ["python", "-m", "apple_health_parser.scripts.main", "--help"],
+        ["python", "-m", "apple_health_parser.scripts.export.main", "--help"],
         capture_output=True,
         text=True,
     )
@@ -15,7 +15,7 @@ def test_cli_help():
 def test_cli_without_args():
     """Test CLI shows help when no arguments provided."""
     result = subprocess.run(
-        ["python", "-m", "apple_health_parser.scripts.main"],
+        ["python", "-m", "apple_health_parser.scripts.export.main"],
         capture_output=True,
         text=True,
     )
@@ -26,7 +26,7 @@ def test_cli_without_args():
 def test_cli_invalid_option():
     """Test CLI handles invalid options gracefully."""
     result = subprocess.run(
-        ["python", "-m", "apple_health_parser.scripts.main", "--invalid-option"],
+        ["python", "-m", "apple_health_parser.scripts.export.main", "--invalid-option"],
         capture_output=True,
         text=True,
     )
