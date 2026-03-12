@@ -35,7 +35,7 @@ apple-health-parser-cli = "apple_health_parser.scripts.export.main:main"
 apple-health-parser-year-recap = "apple_health_parser.scripts.recap.main:main"
 
 [build-system]
-requires = ["uv", "setuptools"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.coverage.run]
@@ -57,4 +57,5 @@ upload_to_PyPI = false
 upload_to_release = true
 
 [tool.setuptools.packages.find]
+where = ["."]
 include = ["apple_health_parser*"]
