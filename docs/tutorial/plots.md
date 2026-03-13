@@ -4,7 +4,7 @@
 
 There are 3 types of plots that can be generated:
 
-1. **Standard**: The most generic type of plot *Apple Health Parser* can generate. With the exception of *heart rate* data that includes *motion context* metadata, all remaining flags are plotted the same way.
+1. **Standard**: The most generic type of plot _Apple Health Parser_ can generate. With the exception of _heart rate_ data that includes _motion context_ metadata, all remaining flags are plotted the same way.
 2. **Heatmap**: Heatmaps are useful when trying to visualize 2-dimensional data such as yearly views (i.e. record at a given day and month).
 3. **Overview**: Overview plots include multiple flags (e.g. the activity overview includes the active energy burned, exercise time, and stand time).
 4. **Sleep**: Sleep plots are a special type of plot that visualizes the sleep data in a more intuitive way, showing the start and end times of each sleep stage.
@@ -35,14 +35,14 @@ When instantianting `Plot`, only one argument is required: the `data` argument -
 
 The allowed `operation` attributes are listed in the table below.
 
-| Operation   |       Description       |
-|:-----------:|:-----------------------:|
-| `count`     | Total count of records  |
-| `max`       | Max value of records    |
-| `mean`      | Mean value of records   |
-| `median`    | Median value of records |
-| `min`       | Min value of records    |
-| `sum`       | Sum of records          |
+| Operation |       Description       |
+| :-------: | :---------------------: |
+|  `count`  | Total count of records  |
+|   `max`   |  Max value of records   |
+|  `mean`   |  Mean value of records  |
+| `median`  | Median value of records |
+|   `min`   |  Min value of records   |
+|   `sum`   |     Sum of records      |
 
 ### Showing/Saving
 
@@ -86,16 +86,16 @@ Below you can find some examples for both the standard and heatmap plots.
 ### Distance walking/running
 
 === "Standard"
-    ![distance_walking_running_plot_light](../assets/plots/plot_distance_walking_running_2024_sum_light.svg#only-light)
-    ![distance_walking_running_plot_dark](../assets/plots/plot_distance_walking_running_2024_sum_dark.svg#only-dark)
+![distance_walking_running_plot_light](../assets/plots/plot_distance_walking_running_2024_sum_light.svg#only-light)
+![distance_walking_running_plot_dark](../assets/plots/plot_distance_walking_running_2024_sum_dark.svg#only-dark)
 
 === "Heatmap"
-    ![distance_walking_running_heatmap_light](../assets/plots/heatmap_distance_walking_running_2024_sum_light.svg#only-light)
-    ![distance_walking_running_heatmap_dark](../assets/plots/heatmap_distance_walking_running_2024_sum_dark.svg#only-dark)
+![distance_walking_running_heatmap_light](../assets/plots/heatmap_distance_walking_running_2024_sum_light.svg#only-light)
+![distance_walking_running_heatmap_dark](../assets/plots/heatmap_distance_walking_running_2024_sum_dark.svg#only-dark)
 
 ### Activity overview
 
-*Apple Health Parser* also comes with a handy way of plotting the *activity overview* which includes the following:
+_Apple Health Parser_ also comes with a handy way of plotting the _activity overview_ which includes the following:
 
 - **Active energy burned (kcal)**: total amount of energy burned through physical activity, including both exercise and daily activities. It is measured in kilocalories (kcal) and provides an estimate of the calories expended by the body.
 - **Apple exercise time (min)**: duration of exercise activities recorded by your Apple device. It measures the amount of time spent actively engaged in physical exercise, such as running, walking, or cycling.
@@ -106,7 +106,7 @@ Below you can find some examples for both the standard and heatmap plots.
 
 ### Sleep
 
-*Apple Health Parser* also provides a way to visualize the sleep data in a more intuitive way, showing the start and end times of each sleep stage. The sleep stages are represented as follows:
+_Apple Health Parser_ also provides a way to visualize the sleep data in a more intuitive way, showing the start and end times of each sleep stage. The sleep stages are represented as follows:
 
 - **Awake**: Represents the periods when the user is awake during the night.
 - **Core**: Represents the light sleep stage, where the user is in a relaxed state but not in deep sleep.
@@ -119,7 +119,7 @@ For this type of plot, you can use the `SleepPlot` class which is a subclass of 
 from apple_health_parser.plot.sleep import SleepPlot
 
 
-plt = SleepPlot(data=data, timerange=("2024-01-01T00:00:00Z", "2024-12-31T23:59:59Z"))
+plt = SleepPlot(data=data, timerange=("2024-01-01T00:00:00Z", "2024-01-02T08:00:00Z"))
 plt.plot(save=True)
 ```
 

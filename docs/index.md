@@ -2,7 +2,7 @@
 
 ![logo](assets/images/logo.png){ align=left width=18% }
 
-The *Apple Health Parser* Python package simplifies the extraction and analysis of health data exported from [Apple HealthKit](https://developer.apple.com/documentation/healthkit). Designed for seamless integration into data science workflows and health analytics applications, this package offers robust parsing and plotting capabilities for various health metrics stored in the Apple Health export XML format.
+The _Apple Health Parser_ Python package simplifies the extraction and analysis of health data exported from [Apple HealthKit](https://developer.apple.com/documentation/healthkit). Designed for seamless integration into data science workflows and health analytics applications, this package offers robust parsing and plotting capabilities for various health metrics stored in the Apple Health export XML format.
 
 !!! warning
     This package is still in active development and has not been tested on real data coming from different sources, nor has it been tested with data originating from versions of iOS < 17.

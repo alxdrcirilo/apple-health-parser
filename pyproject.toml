@@ -31,7 +31,7 @@ dev = [
 ]
 
 [project.scripts]
-apple-health-parser-cli = "apple_health_parser.scripts.export.main:main"
+apple-health-parser-export = "apple_health_parser.scripts.export.main:main"
 apple-health-parser-year-recap = "apple_health_parser.scripts.recap.main:main"
 
 [build-system]
@@ -41,6 +41,8 @@ build-backend = "setuptools.build_meta"
 [tool.coverage.run]
 omit = [
     "apple_health_parser/scripts/main.py",
+    "apple_health_parser/scripts/export/*",
+    "apple_health_parser/scripts/recap/*",
 ]
 
 [tool.mypy]

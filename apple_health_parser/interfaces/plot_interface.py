@@ -28,11 +28,11 @@ class PlotInterface(ABC):
 
         Args:
             data (ParsedData): ParsedData object
-            year (int, optional): Year, defaults to date.today().year
+            year (int): Year, defaults to date.today().year
             source (str | None, optional): Source, defaults to None
             operation (str | None, optional): Operation, defaults to None
-            heatmap (bool, optional): Flag to plot a heatmap, defaults to False
-            title (bool, optional): Flag to include the plot title, defaults to False
+            heatmap (bool): Flag to plot a heatmap, defaults to False
+            title (bool): Flag to include the plot title, defaults to False
         """
         self.src = source
         self.data = data
