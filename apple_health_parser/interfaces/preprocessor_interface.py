@@ -62,6 +62,7 @@ class PreprocessorInterface(ABC):
     def _validate(self) -> None:
         """
         Validate the flag, operation, and year.
+        Skip year validation for sleep data.
 
         Raises:
             MissingYear: Missing year in the records
@@ -70,7 +71,11 @@ class PreprocessorInterface(ABC):
             InvalidSource: Invalid source name
         """
         years = self.data.records.start_date.dt.year.unique().tolist()
-        if self.year not in years:
+
+        if (
+            self.flag != "HKCategoryTypeIdentifierSleepAnalysis"
+            and self.year not in years
+        ):
             raise MissingYear(self.year, years)
 
         if self.oper is not None:

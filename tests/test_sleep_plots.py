@@ -12,14 +12,14 @@ class TestSleepPlot:
     def test_get_figure(self, parser: Parser) -> None:
         records = parser.get_flag_records(flag="HKCategoryTypeIdentifierSleepAnalysis")
 
-        plot = SleepPlot(data=records, year=2024)
+        plot = SleepPlot(data=records)
         fig = plot._get_figure()
         assert isinstance(fig, Figure)
 
     def test_plot(self, parser: Parser) -> None:
         records = parser.get_flag_records(flag="HKCategoryTypeIdentifierSleepAnalysis")
 
-        plot = SleepPlot(data=records, year=2024)
+        plot = SleepPlot(data=records)
         fig = plot.plot(show=False, save=False)
         assert isinstance(fig, Figure)
 
@@ -40,7 +40,7 @@ class TestSleepPlot:
     def test_plot_invalid_image_format(self, parser: Parser) -> None:
         records = parser.get_flag_records(flag="HKCategoryTypeIdentifierSleepAnalysis")
 
-        overview = SleepPlot(data=records, year=2024)
+        overview = SleepPlot(data=records)
         fmt = "tiff"
         with pytest.raises(InvalidImageFormat):
             overview.plot(show=False, save=True, format=fmt)

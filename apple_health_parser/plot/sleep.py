@@ -13,21 +13,18 @@ class SleepPlot(PlotInterface):
     Plot the parsed sleep data.
     """
 
-    def __init__(
-        self, data: ParsedData, year: int, timerange: tuple[str, str] | None = None
-    ):
+    def __init__(self, data: ParsedData, timerange: tuple[str, str] | None = None):
         """
         Initialize the SleepPlot.
 
         Args:
             data (ParsedData): Parsed data object containing sleep records.
-            year (int): Year for which the data is plotted.
             timerange (tuple, optional): Start and end date for the plot in ISO format.
                 If provided, the data will be filtered to include only records within this range.
                 Must be a tuple of two strings in ISO format (e.g. `("2024-03-01T20:00:00+00:00", "2024-03-02T08:00:00+00:00")`).
                 Defaults to None, which means no filtering is applied.
         """
-        super().__init__(data=data, year=year)
+        super().__init__(data=data)
 
         if timerange is not None:
             # Validate timerange
@@ -83,8 +80,9 @@ class SleepPlot(PlotInterface):
             )
 
         fig.update_layout(
+            title=self.psets.title,
             xaxis_title="Date",
-            yaxis_title=self.psets.title_yaxis,
+            yaxis_title="Sleep Analysis",
             legend_title_text=self.psets.legend,
             template="simple_white",
         )
