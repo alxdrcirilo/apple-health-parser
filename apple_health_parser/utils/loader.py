@@ -53,7 +53,10 @@ class Loader:
         logger.info(f"Compressed: {file_size / 1e6:.2f} MB")
         logger.info(f"Uncompressed: {dir_size / 1e6:.2f} MB")
 
-        return (export_dir / "export.xml").resolve()
+        try:
+            return (export_dir / "export.xml").resolve()
+        except FileNotFoundError:
+            return (export_dir / "Export.xml").resolve()
 
     @staticmethod
     def delete_previous_export(output_dir: Path, overwrite: bool | None) -> None:
