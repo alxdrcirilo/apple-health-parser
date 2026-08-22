@@ -119,6 +119,11 @@ class Parser(Loader):
                         )
                     )
                 else:
+                    # Ensure we have a value that can be parsed to a float.
+                    try:
+                        float(rec.attrib["value"])
+                    except ValueError:
+                        rec.attrib["value"] = '1'
                     models.append(HealthData(**rec.attrib))
 
             except ValidationError as exc:
