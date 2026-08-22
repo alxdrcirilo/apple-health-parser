@@ -264,7 +264,7 @@ class Parser(Loader):
                 return f"{name} ({model})"
 
             return f"{name} ({model}; {software})"
-
+          
         if flag:
             return sorted(
                 {
