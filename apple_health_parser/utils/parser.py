@@ -239,15 +239,23 @@ class Parser(Loader):
             Returns:
                 str: Device name with model and software version
             """
-            device_info = rec.attrib["device"].split(", ")
-            name = device_info[1].split(":")[1]
-            model = device_info[4].split(":")[1]
-            try:
-                software = device_info[5].split(":")[1].strip(">")
-                return f"{name} ({model}; {software})"
-            except IndexError:
+            cleaned = rec.attrib["device"].rstrip('<').lstrip('>')
+            device_parts = cleaned.split(", ")
+            device_info = {}
+            for attrib in device_parts[1:]:
+                key, value = attrib.split(':', 1)
+                device_info[key] = value
+
+            name = device_info.get('name', 'unknown')
+            model = device_info.get('model', 'N/A')
+            software = device_info.get('software', None)
+                
+            if software is None:
                 logger.debug(f"No software version found for {name} ({model})")
                 return f"{name} ({model})"
+
+            return f"{name} ({model}; {software})"
+            
 
         if flag:
             return sorted(
