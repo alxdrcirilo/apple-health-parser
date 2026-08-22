@@ -196,9 +196,9 @@ class TestParser:
                 "Record",
                 attrib={
                     "type": flag,
-                    "value": "invalid_value",
+                    "value": "72",
                     "unit": "count/min",
-                    "startDate": "2024-01-01 01:01:36 +0200",
+                    "startDate": "invalid_date",
                     "endDate": "2024-01-01 01:01:36 +0200",
                     "creationDate": "2024-01-01 01:01:42 +0200",
                     "sourceName": "Test",
@@ -235,9 +235,9 @@ class TestParser:
                 "Record",
                 attrib={
                     "type": flag,
-                    "value": "invalid_value",
+                    "value": "72",
                     "unit": "count/min",
-                    "startDate": "2024-01-01 01:03:36 +0200",
+                    "startDate": "invalid_date",
                     "endDate": "2024-01-01 01:03:36 +0200",
                     "creationDate": "2024-01-01 01:03:42 +0200",
                     "sourceName": "Test",
@@ -289,3 +289,19 @@ class TestParser:
             devices = parser.get_devices(flag)
 
         assert "Mpow MBits S (N/A)" in devices
+
+    def test_get_device_name_with_no_device_attr(self, parser: Parser) -> None:
+        flag = "HKQuantityTypeIdentifierHeartRate"
+
+        record = ET.Element(
+            "Record",
+            attrib={
+                "type": flag,
+                "sourceName": "fake_source",
+            },
+        )
+
+        with mock.patch.dict(parser.records, {flag: [record]}, clear=False):
+            devices = parser.get_devices(flag)
+
+        assert devices == []
