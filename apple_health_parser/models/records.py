@@ -4,6 +4,8 @@ from enum import StrEnum
 from pydantic import BaseModel, Field, computed_field, field_validator
 from pydantic_extra_types.timezone_name import TimeZoneName
 
+from apple_health_parser.utils.logging import logger
+
 
 class MotionContext(StrEnum):
     UNSET = "0"
@@ -79,19 +81,28 @@ class HealthData(BaseModel):
 
     @field_validator("value", mode="before")
     @classmethod
-    def validate_value(cls, v) -> int | float | SleepType:
+    def validate_value(cls, v) -> int | float | str | SleepType:
+        # Some record types (e.g. HKCategoryTypeIdentifierAppleStandHour) use categorical
+        # string values instead of numbers. Keep them as-is to retain information.
         if type(v) is str:
             if v in [e.value for e in SleepType]:
                 return SleepType(v)
             try:
                 return int(v)
             except ValueError:
-                return float(v)
+                try:
+                    return float(v)
+                except ValueError:
+                    logger.debug(f"Keeping value as string: {v!r}")
+                    return v
         return v
 
 
 class HeartRateData(HealthData):
-    device: str = Field(title="Device", description="Device used for measurement")
+    # Not all sources include device info
+    device: str | None = Field(
+        default=None, title="Device", description="Device used for measurement"
+    )
     motion_context: str | None = Field(
         default=None,
         alias="motionContext",
