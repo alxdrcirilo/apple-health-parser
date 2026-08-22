@@ -1,3 +1,4 @@
+import re
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
@@ -242,15 +243,19 @@ class Parser(Loader):
             Returns:
                 str: Device name with model and software version
             """
-            device_info = rec.attrib["device"].split(", ")
-            name = device_info[1].split(":")[1]
-            model = device_info[4].split(":")[1]
-            try:
-                software = device_info[5].split(":")[1].strip(">")
-                return f"{name} ({model}; {software})"
-            except IndexError:
+            device_str = rec.attrib["device"]
+            matches = re.findall(r"(\w+):([^,>]+)", device_str)
+            device_info = {k: v.strip() for k, v in matches}
+
+            name = device_info.get("name", "Unknown")
+            model = device_info.get("model", "N/A")
+            software = device_info.get("software")
+
+            if software is None:
                 logger.debug(f"No software version found for {name} ({model})")
                 return f"{name} ({model})"
+
+            return f"{name} ({model}; {software})"
 
         if flag:
             return sorted(

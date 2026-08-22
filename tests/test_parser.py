@@ -253,3 +253,39 @@ class TestParser:
         assert len(models) == 1
         captured = capsys.readouterr()
         assert "Failed to parse 2 records" in captured.err
+
+    def test_get_device_name(self, parser: Parser) -> None:
+        flag = "HKQuantityTypeIdentifierHeartRate"
+        device_str = "<<HKDevice: 0x3012772a0>, name:Apple Watch, manufacturer:Apple Inc., model:Watch, hardware:Watch6,7, software:10.2>"
+
+        record = ET.Element(
+            "Record",
+            attrib={
+                "type": flag,
+                "device": device_str,
+                "sourceName": "fake_source",
+            },
+        )
+
+        with mock.patch.dict(parser.records, {flag: [record]}, clear=False):
+            devices = parser.get_devices(flag)
+
+        assert "Apple Watch (Watch; 10.2)" in devices
+
+    def test_get_device_name_with_missing_fields(self, parser: Parser) -> None:
+        flag = "HKQuantityTypeIdentifierHeartRate"
+        device_str = "<<HKDevice: 0xcfb8ac180>, name:Mpow MBits S, localIdentifier:17:F1:D8:14:1B:A1-tacl, creation date:2022-05-07 15:46:46 +0000>"
+
+        record = ET.Element(
+            "Record",
+            attrib={
+                "type": flag,
+                "device": device_str,
+                "sourceName": "fake_source",
+            },
+        )
+
+        with mock.patch.dict(parser.records, {flag: [record]}, clear=False):
+            devices = parser.get_devices(flag)
+
+        assert "Mpow MBits S (N/A)" in devices
