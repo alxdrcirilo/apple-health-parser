@@ -61,7 +61,7 @@ Plots can be `shown` and/or `saved`. Showing a plot will trigger a new tab to sh
 ## Examples
 
 ```python
-from apple_health_parser.plot import Plot
+from apple_health_parser.plot.plots import Plot
 
 
 plt = Plot(data=data, source=source, operation="sum")
