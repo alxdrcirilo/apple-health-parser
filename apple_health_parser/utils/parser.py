@@ -119,9 +119,18 @@ class Parser(Loader):
                         )
                     )
                 else:
+                    # Some records have a value that equals the flag name,
+                    # or HKCategoryValueNotApplicable. We change these to a
+                    # 1 so it can record the event.
+                    try:
+                        float(rec.attrib["value"])
+                    except ValueError:
+                        rec.attrib["value"] = '1'
                     models.append(HealthData(**rec.attrib))
 
             except ValidationError as exc:
+                print(exc)
+                print(rec.attrib)
                 error_type = exc.errors()[0]["type"]
                 loc = exc.errors()[0]["loc"]
                 try:
@@ -132,7 +141,7 @@ class Parser(Loader):
 
         if failed:
             logger.warning(
-                click.style(f"Failed to parse {len(failed)} records", bold=True)
+                click.style(f"Failed to parse {sum(failed.values())} records", bold=True)
             )
 
         return models
@@ -239,15 +248,22 @@ class Parser(Loader):
             Returns:
                 str: Device name with model and software version
             """
-            device_info = rec.attrib["device"].split(", ")
-            name = device_info[1].split(":")[1]
-            model = device_info[4].split(":")[1]
-            try:
-                software = device_info[5].split(":")[1].strip(">")
-                return f"{name} ({model}; {software})"
-            except IndexError:
+            cleaned = rec.attrib["device"].rstrip('<').lstrip('>')
+            device_parts = cleaned.split(", ")
+            device_info = {}
+            for attrib in device_parts[1:]:
+                key, value = attrib.split(':', 1)
+                device_info[key] = value
+
+            name = device_info.get('name', 'unknown')
+            model = device_info.get('model', 'N/A')
+            software = device_info.get('software', None)
+                
+            if software is None:
                 logger.debug(f"No software version found for {name} ({model})")
                 return f"{name} ({model})"
+
+            return f"{name} ({model}; {software})"
 
         if flag:
             return sorted(
