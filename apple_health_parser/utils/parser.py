@@ -132,7 +132,10 @@ class Parser(Loader):
 
         if failed:
             logger.warning(
-                click.style(f"Failed to parse {len(failed)} records", bold=True)
+                click.style(
+                    f"Failed to parse {sum(failed.values())} {'records' if sum(failed.values()) > 1 else 'record'}",
+                    bold=True,
+                )
             )
 
         return models

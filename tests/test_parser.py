@@ -186,3 +186,70 @@ class TestParser:
         assert all(
             item in str_records for item in ["Flag", "Sources", "Dates", "Records"]
         )
+
+    def test_build_models_failed_records_count(self, parser: Parser, capsys) -> None:
+        flag = "HKQuantityTypeIdentifierHeartRate"
+
+        # 1 invalid record
+        records_singular = [
+            ET.Element(
+                "Record",
+                attrib={
+                    "type": flag,
+                    "value": "invalid_value",
+                    "unit": "count/min",
+                    "startDate": "2024-01-01 01:01:36 +0200",
+                    "endDate": "2024-01-01 01:01:36 +0200",
+                    "creationDate": "2024-01-01 01:01:42 +0200",
+                    "sourceName": "Test",
+                    "sourceVersion": "1.0",
+                    "device": "Test Device",
+                },
+            ),
+            ET.Element(
+                "Record",
+                attrib={
+                    "type": flag,
+                    "value": "72",
+                    "unit": "count/min",
+                    "startDate": "2024-01-01 01:02:36 +0200",
+                    "endDate": "2024-01-01 01:02:36 +0200",
+                    "creationDate": "2024-01-01 01:02:42 +0200",
+                    "sourceName": "Test",
+                    "sourceVersion": "1.0",
+                    "device": "Test Device",
+                },
+            ),
+        ]
+
+        with mock.patch.dict(parser.records, {flag: records_singular}, clear=False):
+            models = parser._build_models(flag)
+
+        assert len(models) == 1
+        captured = capsys.readouterr()
+        assert "Failed to parse 1 record" in captured.err
+
+        # 2 invalid records
+        records_plural = records_singular + [
+            ET.Element(
+                "Record",
+                attrib={
+                    "type": flag,
+                    "value": "invalid_value",
+                    "unit": "count/min",
+                    "startDate": "2024-01-01 01:03:36 +0200",
+                    "endDate": "2024-01-01 01:03:36 +0200",
+                    "creationDate": "2024-01-01 01:03:42 +0200",
+                    "sourceName": "Test",
+                    "sourceVersion": "1.0",
+                    "device": "Test Device",
+                },
+            ),
+        ]
+
+        with mock.patch.dict(parser.records, {flag: records_plural}, clear=False):
+            models = parser._build_models(flag)
+
+        assert len(models) == 1
+        captured = capsys.readouterr()
+        assert "Failed to parse 2 records" in captured.err
