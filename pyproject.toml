@@ -1,6 +1,6 @@
 [project]
 name = "apple-health-parser"
-version = "2.0.3"
+version = "2.0.4"
 description = "Python package to parse, analyse, and plot Apple HealthKit data"
 authors = [{ name = "Alexandre Cirilo", email = "38657258+alxdrcirilo@users.noreply.github.com" }]
 license = "MIT"
