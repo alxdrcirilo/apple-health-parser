@@ -13,7 +13,7 @@ def test_extract_zip() -> None:
         with TemporaryDirectory() as temp_dir:
             # Trigger deletion of previous export warning
             for _ in range(2):
-                zip_path = Path(temp_dir) / "test.zip"
+                zip_path = Path(temp_dir) / "export.zip"
 
                 with ZipFile(zip_path, "w") as zip_file:
                     zip_file.writestr("apple_health_export/export.xml", "test data")
