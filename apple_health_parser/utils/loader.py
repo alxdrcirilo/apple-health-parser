@@ -53,9 +53,7 @@ class Loader:
         logger.info(f"Compressed: {file_size / 1e6:.2f} MB")
         logger.info(f"Uncompressed: {dir_size / 1e6:.2f} MB")
 
-        path = export_dir / "export.xml"
-        if not path.exists():
-            path = export_dir / "Export.xml"
+        path = export_dir / f"{Path(zip_file).stem}.xml"
 
         return path.resolve()
 
