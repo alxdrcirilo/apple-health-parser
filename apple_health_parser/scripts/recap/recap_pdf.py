@@ -41,8 +41,10 @@ def get_recap_report(
         pdf_section_data (dict[str, PdfSectionData]): Data for each section of the report, keyed by flag
     """
     pdf = PDF(orientation="P", unit="mm", format="A4")
-    pdf.author = "Apple Health Parser"
-    pdf.title = f"Apple Health Year Recap - {pdf_section_data[next(iter(pdf_section_data))].year}"
+    pdf.set_author("Apple Health Parser")
+    pdf.set_title(
+        f"Apple Health Year Recap - {pdf_section_data[next(iter(pdf_section_data))].year}"
+    )
 
     # Text block width
     pdf.set_left_margin(20)

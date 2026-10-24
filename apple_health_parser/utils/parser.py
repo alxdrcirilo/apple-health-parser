@@ -216,6 +216,10 @@ class Parser(Loader):
         elif isinstance(flag, list):
             return {f: _get_parsed_data(flag=f) for f in flag}
 
+    @overload
+    def get_devices(self, flag: str) -> list[str]: ...
+    @overload
+    def get_devices(self, flag: None = None) -> dict[str, list[str]]: ...
     def get_devices(self, flag: str | None = None) -> list[str] | dict[str, list[str]]:
         """
         Get devices for each flag or for a given flag.
@@ -277,6 +281,10 @@ class Parser(Loader):
                 for flag in self.flags
             }
 
+    @overload
+    def get_sources(self, flag: str) -> list[str]: ...
+    @overload
+    def get_sources(self, flag: None = None) -> dict[str, list[str]]: ...
     def get_sources(self, flag: str | None = None) -> list[str] | dict[str, list[str]]:
         """
         Get sources for each flag or for a given flag.

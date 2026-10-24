@@ -73,7 +73,7 @@ class Plot(PlotInterface):
             )
 
         else:
-            fig: Figure = getattr(px, self.ptype)(
+            fig = getattr(px, self.ptype)(
                 data_frame=self.dataframe,
                 x=self.psets.x,
                 y=self.psets.y,

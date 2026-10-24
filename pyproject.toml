@@ -23,6 +23,7 @@ dev = [
     "ipdb>=0.13.13",
     "mkdocs-material>=9.7.2",
     "mkdocstrings[python]>=1.0.3",
+    "mypy>=2.4.0",
     "pyclean>=3.5.0",
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
