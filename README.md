@@ -34,7 +34,7 @@ In a nutshell, _Apple Health Parser_ is capable of:
 
 ## Year Recap
 
-Turn a year of Apple Health data into a shareable PDF report - weekly charts, stats, and a five-number summary for every metric you track.
+Turn a year of Apple Health data into a shareable PDF report including weekly charts, stats, and a five-number summary for every metric you track.
 
 ```bash
 apple-health-parser-year-recap --zip_file <export.zip> --year <year>
