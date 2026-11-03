@@ -32,5 +32,15 @@ In a nutshell, _Apple Health Parser_ is capable of:
 - Plotting (optionally interactive) health records
 - Exporting plots and tables from the parsed health records
 
+## Year Recap
+
+Turn a year of Apple Health data into a shareable PDF report - weekly charts, stats, and a five-number summary for every metric you track.
+
+```bash
+apple-health-parser-year-recap --zip_file <export.zip> --year <year>
+```
+
+Try it in your browser at [apple-health-parser-web](https://alxdrcirilo.dev/apple-health-parser-web). It runs entirely client-side, so your export never leaves your device.
+
 > [!WARNING]
 > This package is still in **active development** and has not been tested on real data coming from different sources, nor has it been tested with data originating from versions of iOS < 17.

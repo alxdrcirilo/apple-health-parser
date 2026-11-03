@@ -18,6 +18,34 @@ class PdfSectionData:
     quantiles: tuple[float, float, float, float, float]
 
 
+# fpdf2 Arial font only supports latin-1
+_LATIN1_SAFE_REPLACEMENTS = {
+    "—": "-",
+    "–": "-",
+    "‘": "'",
+    "’": "'",
+    "“": '"',
+    "”": '"',
+    "…": "...",
+}
+
+
+def _to_latin1_safe(text: str) -> str:
+    """
+    Replace common typographic characters that fall outside latin-1 with a
+    latin-1-safe equivalent, since fpdf2 core fonts can only render latin-1.
+
+    Args:
+        text (str): Text to sanitize
+
+    Returns:
+        str: `text` with any known non-latin-1 characters replaced
+    """
+    for char, replacement in _LATIN1_SAFE_REPLACEMENTS.items():
+        text = text.replace(char, replacement)
+    return text
+
+
 class PDF(FPDF):
     def footer(self):
         self.set_y(-15)
@@ -75,10 +103,10 @@ def get_recap_report(
             pdf.ln(16)
 
         pdf.set_font("Arial", "B", 18)
-        pdf.cell(0, 10, f"{metric_metadata.name}")
+        pdf.cell(0, 10, _to_latin1_safe(metric_metadata.name))
         pdf.ln(10)
 
-        metric_desc = metric_metadata.description
+        metric_desc = _to_latin1_safe(metric_metadata.description)
         pdf.set_font("Arial", "I", 9)
         pdf.set_text_color(120)
         pdf.multi_cell(WIDTH, 5, metric_desc, border="T", padding=2)
@@ -89,20 +117,21 @@ def get_recap_report(
 
         pdf.set_font("Arial", size=9)
         pdf.set_text_color(1)
-        pdf.multi_cell(WIDTH, 5, stats_text, markdown=True)
+        pdf.multi_cell(WIDTH, 5, _to_latin1_safe(stats_text), markdown=True)
         pdf.ln(6)
 
         pdf.image(box_image_data, w=WIDTH, keep_aspect_ratio=True)
         pdf.ln(10)
 
         q_min, q1, q2, q3, q_max = quantiles
+        unit = _to_latin1_safe(metric_metadata.unit)
         table_data = (
-            ("Metric", metric_metadata.unit),
-            ("Min", f"{q_min:.2f} {metric_metadata.unit}"),
-            ("Q1", f"{q1:.2f} {metric_metadata.unit}"),
-            ("Median", f"{q2:.2f} {metric_metadata.unit}"),
-            ("Q3", f"{q3:.2f} {metric_metadata.unit}"),
-            ("Max", f"{q_max:.2f} {metric_metadata.unit}"),
+            ("Metric", unit),
+            ("Min", f"{q_min:.2f} {unit}"),
+            ("Q1", f"{q1:.2f} {unit}"),
+            ("Median", f"{q2:.2f} {unit}"),
+            ("Q3", f"{q3:.2f} {unit}"),
+            ("Max", f"{q_max:.2f} {unit}"),
         )
 
         pdf.set_font("Arial", size=7)

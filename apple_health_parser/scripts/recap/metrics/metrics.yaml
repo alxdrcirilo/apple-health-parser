@@ -63,6 +63,45 @@ HKQuantityTypeIdentifierVO2Max:
     Over the period, your average VO2 Max was **{dist_avg:.2f} ml/kg/min**. Your median VO2 Max was **{dist_median:.2f} ml/kg/min**. Your lowest recorded VO2 Max was **{dist_min:.2f} ml/kg/min**, while your highest reached **{dist_max:.2f} ml/kg/min**. In total, you have **{dist_count} days** of VO2 Max data.
   unit: ml/kg/min
 
+HKQuantityTypeIdentifierBodyMass:
+  axis_label: Weight (kg)
+  color: "#636efa"
+  description: Average body weight per day, in kilograms. Tracks changes in weight over the year.
+  flag: HKQuantityTypeIdentifierBodyMass
+  marker_color: "#636efa"
+  name: Weight
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average weight was **{dist_avg:.2f} kg**. Your median weight was **{dist_median:.2f} kg**. Your lowest recorded weight was **{dist_min:.2f} kg**, while your highest reached **{dist_max:.2f} kg**. In total, you have **{dist_count} days** of weight data.
+  unit: kg
+
+HKQuantityTypeIdentifierLeanBodyMass:
+  axis_label: Lean Body Mass (kg)
+  color: "#00cc96"
+  description: Average lean body mass per day, in kilograms. Reflects muscle, bone, and other non-fat tissue over the year.
+  flag: HKQuantityTypeIdentifierLeanBodyMass
+  marker_color: "#00cc96"
+  name: Lean Body Mass
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average lean body mass was **{dist_avg:.2f} kg**. Your median lean body mass was **{dist_median:.2f} kg**. Your lowest recorded lean body mass was **{dist_min:.2f} kg**, while your highest reached **{dist_max:.2f} kg**. In total, you have **{dist_count} days** of lean body mass data.
+  unit: kg
+
+HKQuantityTypeIdentifierBodyFatPercentage:
+  axis_label: Body Fat (%)
+  color: "#ff6692"
+  description: Average body fat percentage per day. Tracks changes in body composition over the year.
+  flag: HKQuantityTypeIdentifierBodyFatPercentage
+  marker_color: "#ff6692"
+  name: Body Fat Percentage
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average body fat percentage was **{dist_avg:.2f}%**. Your median body fat percentage was **{dist_median:.2f}%**. Your lowest recorded body fat percentage was **{dist_min:.2f}%**, while your highest reached **{dist_max:.2f}%**. In total, you have **{dist_count} days** of body fat percentage data.
+  unit: "%"
+
 HKQuantityTypeIdentifierTimeInDaylight:
   axis_label: Time in Daylight (minutes)
   color: "#1a237e"
@@ -75,3 +114,367 @@ HKQuantityTypeIdentifierTimeInDaylight:
   summary_template: >
     Over the period, you spent a total of **{dist_total:.2f} minutes** in daylight. On average, you spent **{dist_avg:.2f} minutes** in daylight per day, with a median daily time of **{dist_median:.2f} minutes**. Your shortest day in daylight was **{dist_min:.2f} minutes**, while your longest reached **{dist_max:.2f} minutes**. In total, you have **{dist_count} days** of daylight exposure data.
   unit: minutes
+
+HKQuantityTypeIdentifierStepCount:
+  axis_label: Step Count (steps)
+  color: "#ff8f00"
+  description: Total steps taken per week. A fundamental measure of daily movement and activity level.
+  flag: HKQuantityTypeIdentifierStepCount
+  marker_color: "#ffb300"
+  name: Step Count
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you took a total of **{dist_total:.0f} steps**. On average, you took **{dist_avg:.0f} steps** per day, with a median daily count of **{dist_median:.0f}**. Your least active day had **{dist_min:.0f} steps**, while your most active reached **{dist_max:.0f}**. You have **{dist_count} days** of step data.
+  unit: steps
+
+HKQuantityTypeIdentifierFlightsClimbed:
+  axis_label: Flights Climbed
+  color: "#5c6bc0"
+  description: Number of flights of stairs climbed per week. Reflects stair-climbing activity and elevation gain in daily movement.
+  flag: HKQuantityTypeIdentifierFlightsClimbed
+  marker_color: "#7986cb"
+  name: Flights Climbed
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you climbed a total of **{dist_total:.0f} flights**. On average, you climbed **{dist_avg:.1f} flights** per day, with a median of **{dist_median:.1f}**. Your lowest day had **{dist_min:.0f} flights**, while your highest reached **{dist_max:.0f}**. You have **{dist_count} days** of data.
+  unit: flights
+
+HKQuantityTypeIdentifierAppleExerciseTime:
+  axis_label: Exercise Time (min)
+  color: "#2e7d32"
+  description: Total active exercise minutes per week, as counted by Apple Watch's Exercise ring. Each minute of brisk activity or workout contributes.
+  flag: HKQuantityTypeIdentifierAppleExerciseTime
+  marker_color: "#43a047"
+  name: Exercise Time
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you accumulated a total of **{dist_total:.0f} minutes** of exercise. On average, you exercised **{dist_avg:.1f} minutes** per day, with a median of **{dist_median:.1f} min**. Your lowest day had **{dist_min:.0f} min**, while your highest reached **{dist_max:.0f} min**. You have **{dist_count} days** of exercise time data.
+  unit: min
+
+HKQuantityTypeIdentifierAppleStandTime:
+  axis_label: Stand Time (min)
+  color: "#00838f"
+  description: Total time spent standing per week, as tracked by Apple Watch's Stand ring. Encourages breaking up prolonged sitting throughout the day.
+  flag: HKQuantityTypeIdentifierAppleStandTime
+  marker_color: "#00acc1"
+  name: Stand Time
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, you stood for a total of **{dist_total:.0f} minutes**. On average, you stood **{dist_avg:.1f} minutes** per day, with a median of **{dist_median:.1f} min**. Your lowest day had **{dist_min:.0f} min**, while your highest reached **{dist_max:.0f} min**. You have **{dist_count} days** of stand time data.
+  unit: min
+
+HKQuantityTypeIdentifierBasalEnergyBurned:
+  axis_label: Basal Energy Burned (kcal)
+  color: "#e65100"
+  description: Resting metabolic energy burned per week — calories your body uses just to maintain basic functions, regardless of activity.
+  flag: HKQuantityTypeIdentifierBasalEnergyBurned
+  marker_color: "#ef6c00"
+  name: Basal Energy Burned
+  operation: "sum"
+  plot_type: "bar"
+  summary_template: >
+    Over the period, your body burned a total of **{dist_total:.0f} kcal** at rest. On average, you burned **{dist_avg:.0f} kcal** per day at baseline, with a median of **{dist_median:.0f} kcal**. Your lowest day was **{dist_min:.0f} kcal**, while your highest was **{dist_max:.0f} kcal**. You have **{dist_count} days** of basal energy data.
+  unit: kcal
+
+HKQuantityTypeIdentifierHeartRate:
+  axis_label: Heart Rate (bpm)
+  color: "#e53935"
+  description: Average heart rate per week, in beats per minute. Captures overall cardiovascular activity across all contexts — rest, exercise, and everything in between.
+  flag: HKQuantityTypeIdentifierHeartRate
+  marker_color: "#ef5350"
+  name: Heart Rate
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average heart rate was **{dist_avg:.1f} bpm**, with a median of **{dist_median:.1f} bpm**. Your lowest recorded average was **{dist_min:.1f} bpm**, while your highest was **{dist_max:.1f} bpm**. You have **{dist_count} days** of heart rate data.
+  unit: bpm
+
+HKQuantityTypeIdentifierWalkingHeartRateAverage:
+  axis_label: Walking Heart Rate (bpm)
+  color: "#fb8c00"
+  description: Average heart rate while walking, per day. A lower walking heart rate generally indicates better cardiovascular fitness.
+  flag: HKQuantityTypeIdentifierWalkingHeartRateAverage
+  marker_color: "#ffa726"
+  name: Walking Heart Rate Average
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average walking heart rate was **{dist_avg:.1f} bpm**, with a median of **{dist_median:.1f} bpm**. Your lowest daily average was **{dist_min:.1f} bpm**, while your highest was **{dist_max:.1f} bpm**. You have **{dist_count} days** of walking heart rate data.
+  unit: bpm
+
+HKQuantityTypeIdentifierHeartRateRecoveryOneMinute:
+  axis_label: HR Recovery 1-min (bpm)
+  color: "#43a047"
+  description: Heart rate drop in the first minute after peak exercise. Higher values indicate better cardiovascular fitness and recovery capacity.
+  flag: HKQuantityTypeIdentifierHeartRateRecoveryOneMinute
+  marker_color: "#66bb6a"
+  name: Heart Rate Recovery (1 min)
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average 1-minute heart rate recovery was **{dist_avg:.1f} bpm**, with a median of **{dist_median:.1f} bpm**. Your lowest recovery was **{dist_min:.1f} bpm**, while your best reached **{dist_max:.1f} bpm**. You have **{dist_count} days** of recovery data.
+  unit: bpm
+
+HKQuantityTypeIdentifierHeartRateVariabilitySDNN:
+  axis_label: HRV SDNN (ms)
+  color: "#7e57c2"
+  description: Heart rate variability (SDNN), the standard deviation of beat-to-beat intervals. Higher values typically reflect better autonomic nervous system balance and recovery.
+  flag: HKQuantityTypeIdentifierHeartRateVariabilitySDNN
+  marker_color: "#9575cd"
+  name: Heart Rate Variability (SDNN)
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average HRV was **{dist_avg:.1f} ms**, with a median of **{dist_median:.1f} ms**. Your lowest recorded average was **{dist_min:.1f} ms**, while your highest was **{dist_max:.1f} ms**. You have **{dist_count} days** of HRV data.
+  unit: ms
+
+HKQuantityTypeIdentifierOxygenSaturation:
+  axis_label: Oxygen Saturation (%)
+  color: "#1565c0"
+  description: Average blood oxygen saturation (SpO2) per day, as a percentage. Healthy resting levels are typically above 95%.
+  flag: HKQuantityTypeIdentifierOxygenSaturation
+  marker_color: "#1976d2"
+  name: Oxygen Saturation
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average blood oxygen saturation was **{dist_avg:.1f}%**, with a median of **{dist_median:.1f}%**. Your lowest recorded average was **{dist_min:.1f}%**, while your highest was **{dist_max:.1f}%**. You have **{dist_count} days** of SpO2 data.
+  unit: "%"
+
+HKQuantityTypeIdentifierRespiratoryRate:
+  axis_label: Respiratory Rate (breaths/min)
+  color: "#00838f"
+  description: Average breathing rate per day, in breaths per minute. Typically measured during sleep by Apple Watch.
+  flag: HKQuantityTypeIdentifierRespiratoryRate
+  marker_color: "#00acc1"
+  name: Respiratory Rate
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average respiratory rate was **{dist_avg:.1f} breaths/min**, with a median of **{dist_median:.1f}**. Your lowest daily average was **{dist_min:.1f}**, while your highest was **{dist_max:.1f}**. You have **{dist_count} days** of respiratory rate data.
+  unit: breaths/min
+
+HKQuantityTypeIdentifierAppleSleepingWristTemperature:
+  axis_label: Sleeping Wrist Temp (°C)
+  color: "#bf360c"
+  description: Deviation in wrist skin temperature from your personal baseline during sleep, in °C. Positive values mean warmer than usual; negative values mean cooler.
+  flag: HKQuantityTypeIdentifierAppleSleepingWristTemperature
+  marker_color: "#e64a19"
+  name: Sleeping Wrist Temperature
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average sleeping wrist temperature deviation was **{dist_avg:.2f}°C**, with a median of **{dist_median:.2f}°C**. Your coolest night averaged **{dist_min:.2f}°C**, while your warmest averaged **{dist_max:.2f}°C**. You have **{dist_count} days** of sleeping temperature data.
+  unit: "°C"
+
+HKQuantityTypeIdentifierBodyMassIndex:
+  axis_label: BMI (kg/m²)
+  color: "#558b2f"
+  description: Body Mass Index, calculated as weight divided by height squared. Tracks changes in body composition category over time.
+  flag: HKQuantityTypeIdentifierBodyMassIndex
+  marker_color: "#7cb342"
+  name: Body Mass Index
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average BMI was **{dist_avg:.2f} kg/m²**, with a median of **{dist_median:.2f}**. Your lowest recorded BMI was **{dist_min:.2f}**, while your highest was **{dist_max:.2f}**. You have **{dist_count} days** of BMI data.
+  unit: kg/m²
+
+HKQuantityTypeIdentifierRunningSpeed:
+  axis_label: Running Speed (km/h)
+  color: "#388e3c"
+  description: Average running speed per week, in km/h. Reflects running pace and performance trends over the year.
+  flag: HKQuantityTypeIdentifierRunningSpeed
+  marker_color: "#4caf50"
+  name: Running Speed
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average running speed was **{dist_avg:.2f} km/h**, with a median of **{dist_median:.2f} km/h**. Your slowest average was **{dist_min:.2f} km/h**, while your fastest reached **{dist_max:.2f} km/h**. You have **{dist_count} days** of running speed data.
+  unit: km/h
+
+HKQuantityTypeIdentifierRunningPower:
+  axis_label: Running Power (W)
+  color: "#ef6c00"
+  description: Average running power output per week, in watts. A direct measure of mechanical work rate during running.
+  flag: HKQuantityTypeIdentifierRunningPower
+  marker_color: "#f57c00"
+  name: Running Power
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average running power was **{dist_avg:.1f} W**, with a median of **{dist_median:.1f} W**. Your lowest average was **{dist_min:.1f} W**, while your highest reached **{dist_max:.1f} W**. You have **{dist_count} days** of running power data.
+  unit: W
+
+HKQuantityTypeIdentifierRunningGroundContactTime:
+  axis_label: Ground Contact Time (ms)
+  color: "#00695c"
+  description: Average time each foot spends on the ground per stride, in milliseconds. Lower values typically correlate with faster, more efficient running.
+  flag: HKQuantityTypeIdentifierRunningGroundContactTime
+  marker_color: "#00897b"
+  name: Running Ground Contact Time
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average ground contact time was **{dist_avg:.1f} ms**, with a median of **{dist_median:.1f} ms**. Your shortest contact time was **{dist_min:.1f} ms**, while your longest was **{dist_max:.1f} ms**. You have **{dist_count} days** of ground contact data.
+  unit: ms
+
+HKQuantityTypeIdentifierRunningStrideLength:
+  axis_label: Stride Length (m)
+  color: "#1976d2"
+  description: Average running stride length per week, in metres. Longer strides at the same cadence mean faster running.
+  flag: HKQuantityTypeIdentifierRunningStrideLength
+  marker_color: "#1e88e5"
+  name: Running Stride Length
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average stride length was **{dist_avg:.2f} m**, with a median of **{dist_median:.2f} m**. Your shortest average stride was **{dist_min:.2f} m**, while your longest reached **{dist_max:.2f} m**. You have **{dist_count} days** of stride length data.
+  unit: m
+
+HKQuantityTypeIdentifierRunningVerticalOscillation:
+  axis_label: Vertical Oscillation (cm)
+  color: "#7b1fa2"
+  description: Average vertical bounce of the torso while running, in centimetres. Lower values indicate more efficient, horizontal energy transfer.
+  flag: HKQuantityTypeIdentifierRunningVerticalOscillation
+  marker_color: "#8e24aa"
+  name: Running Vertical Oscillation
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average vertical oscillation was **{dist_avg:.2f} cm**, with a median of **{dist_median:.2f} cm**. Your lowest average was **{dist_min:.2f} cm**, while your highest was **{dist_max:.2f} cm**. You have **{dist_count} days** of vertical oscillation data.
+  unit: cm
+
+HKQuantityTypeIdentifierCyclingSpeed:
+  axis_label: Cycling Speed (km/h)
+  color: "#0277bd"
+  description: Average cycling speed per week, in km/h. Reflects riding pace and performance trends over the year.
+  flag: HKQuantityTypeIdentifierCyclingSpeed
+  marker_color: "#0288d1"
+  name: Cycling Speed
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average cycling speed was **{dist_avg:.2f} km/h**, with a median of **{dist_median:.2f} km/h**. Your slowest average was **{dist_min:.2f} km/h**, while your fastest reached **{dist_max:.2f} km/h**. You have **{dist_count} days** of cycling speed data.
+  unit: km/h
+
+HKQuantityTypeIdentifierCyclingCadence:
+  axis_label: Cycling Cadence (rpm)
+  color: "#01579b"
+  description: Average cycling cadence per week, in revolutions per minute. Higher cadence typically reduces joint stress and improves efficiency.
+  flag: HKQuantityTypeIdentifierCyclingCadence
+  marker_color: "#0277bd"
+  name: Cycling Cadence
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average cycling cadence was **{dist_avg:.1f} rpm**, with a median of **{dist_median:.1f} rpm**. Your lowest average was **{dist_min:.1f} rpm**, while your highest reached **{dist_max:.1f} rpm**. You have **{dist_count} days** of cadence data.
+  unit: rpm
+
+HKQuantityTypeIdentifierCyclingPower:
+  axis_label: Cycling Power (W)
+  color: "#e65100"
+  description: Average cycling power output per week, in watts. Directly measures mechanical work rate on the bike.
+  flag: HKQuantityTypeIdentifierCyclingPower
+  marker_color: "#f4511e"
+  name: Cycling Power
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average cycling power was **{dist_avg:.1f} W**, with a median of **{dist_median:.1f} W**. Your lowest average was **{dist_min:.1f} W**, while your highest reached **{dist_max:.1f} W**. You have **{dist_count} days** of cycling power data.
+  unit: W
+
+HKQuantityTypeIdentifierCyclingFunctionalThresholdPower:
+  axis_label: Cycling FTP (W)
+  color: "#b71c1c"
+  description: Functional Threshold Power — the maximum average power you can sustain for one hour. Higher FTP indicates greater cycling fitness.
+  flag: HKQuantityTypeIdentifierCyclingFunctionalThresholdPower
+  marker_color: "#c62828"
+  name: Cycling Functional Threshold Power
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average Functional Threshold Power was **{dist_avg:.1f} W**, with a median of **{dist_median:.1f} W**. Your lowest recorded FTP was **{dist_min:.1f} W**, while your highest reached **{dist_max:.1f} W**. You have **{dist_count} days** of FTP data.
+  unit: W
+
+HKQuantityTypeIdentifierSixMinuteWalkTestDistance:
+  axis_label: 6-min Walk Distance (m)
+  color: "#1b5e20"
+  description: Distance covered in a six-minute walk test, in metres. A validated measure of functional exercise capacity and cardiorespiratory fitness.
+  flag: HKQuantityTypeIdentifierSixMinuteWalkTestDistance
+  marker_color: "#2e7d32"
+  name: Six Minute Walk Test Distance
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average 6-minute walk test distance was **{dist_avg:.1f} m**, with a median of **{dist_median:.1f} m**. Your shortest result was **{dist_min:.1f} m**, while your longest reached **{dist_max:.1f} m**. You have **{dist_count} tests** recorded.
+  unit: m
+
+HKQuantityTypeIdentifierStairAscentSpeed:
+  axis_label: Stair Ascent Speed (m/s)
+  color: "#33691e"
+  description: Average speed climbing stairs, in metres per second. A practical measure of lower-body strength and cardiovascular fitness.
+  flag: HKQuantityTypeIdentifierStairAscentSpeed
+  marker_color: "#558b2f"
+  name: Stair Ascent Speed
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average stair ascent speed was **{dist_avg:.3f} m/s**, with a median of **{dist_median:.3f} m/s**. Your slowest average was **{dist_min:.3f} m/s**, while your fastest reached **{dist_max:.3f} m/s**. You have **{dist_count} days** of stair ascent data.
+  unit: m/s
+
+HKQuantityTypeIdentifierStairDescentSpeed:
+  axis_label: Stair Descent Speed (m/s)
+  color: "#0d47a1"
+  description: Average speed descending stairs, in metres per second.
+  flag: HKQuantityTypeIdentifierStairDescentSpeed
+  marker_color: "#1565c0"
+  name: Stair Descent Speed
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average stair descent speed was **{dist_avg:.3f} m/s**, with a median of **{dist_median:.3f} m/s**. Your slowest average was **{dist_min:.3f} m/s**, while your fastest reached **{dist_max:.3f} m/s**. You have **{dist_count} days** of stair descent data.
+  unit: m/s
+
+HKQuantityTypeIdentifierEnvironmentalAudioExposure:
+  axis_label: Environmental Audio (dBASPL)
+  color: "#f9a825"
+  description: Average environmental sound level per day, in dBASPL. Prolonged exposure above 80 dBASPL can contribute to hearing damage.
+  flag: HKQuantityTypeIdentifierEnvironmentalAudioExposure
+  marker_color: "#fbc02d"
+  name: Environmental Audio Exposure
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average environmental audio exposure was **{dist_avg:.1f} dBASPL**, with a median of **{dist_median:.1f} dBASPL**. Your quietest day averaged **{dist_min:.1f} dBASPL**, while your loudest reached **{dist_max:.1f} dBASPL**. You have **{dist_count} days** of environmental audio data.
+  unit: dBASPL
+
+HKQuantityTypeIdentifierHeadphoneAudioExposure:
+  axis_label: Headphone Audio (dBASPL)
+  color: "#ad1457"
+  description: Average headphone audio level per day, in dBASPL. Apple Watch monitors this to warn about levels that could affect hearing over time.
+  flag: HKQuantityTypeIdentifierHeadphoneAudioExposure
+  marker_color: "#c2185b"
+  name: Headphone Audio Exposure
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average headphone audio exposure was **{dist_avg:.1f} dBASPL**, with a median of **{dist_median:.1f} dBASPL**. Your quietest day averaged **{dist_min:.1f} dBASPL**, while your loudest reached **{dist_max:.1f} dBASPL**. You have **{dist_count} days** of headphone audio data.
+  unit: dBASPL
+
+HKQuantityTypeIdentifierEnvironmentalSoundReduction:
+  axis_label: Sound Reduction (dB)
+  color: "#004d40"
+  description: Amount of environmental sound reduced by AirPods in Transparency or Noise Cancellation mode, in dB. Recorded when Conversation Awareness or Adaptive Audio is active.
+  flag: HKQuantityTypeIdentifierEnvironmentalSoundReduction
+  marker_color: "#00695c"
+  name: Environmental Sound Reduction
+  operation: "mean"
+  plot_type: "line"
+  summary_template: >
+    Over the period, your average environmental sound reduction was **{dist_avg:.1f} dB**, with a median of **{dist_median:.1f} dB**. Your lowest average was **{dist_min:.1f} dB**, while your highest was **{dist_max:.1f} dB**. You have **{dist_count} days** of sound reduction data.
+  unit: dB
